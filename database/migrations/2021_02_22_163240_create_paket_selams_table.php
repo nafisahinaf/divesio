@@ -15,11 +15,13 @@ class CreatePaketSelamsTable extends Migration
     {
         Schema::create('paket_selams', function (Blueprint $table) {
             $table->integer('id_paket')->primary();
+            $table->integer('id_dive_center');
             $table->string('nama_paket', 100);
             $table->text('deskripsi');
             $table->text('fasilitas');
-            $table->enum('ketersediaan', ['FULLY BOOKED', 'AVAILABLE', '', '']);
+            $table->enum('ketersediaan', ['FULLY BOOKED', 'AVAILABLE']);
             $table->integer('jumlah_peserta');
+            $table->string('foto', 30);
             $table->float('harga', 10, 0);
         });
     }

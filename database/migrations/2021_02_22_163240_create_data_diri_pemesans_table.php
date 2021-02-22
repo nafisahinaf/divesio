@@ -16,9 +16,9 @@ class CreateDataDiriPemesansTable extends Migration
         Schema::create('data_diri_pemesans', function (Blueprint $table) {
             $table->integer('id_data_diri')->primary();
             $table->integer('id_order')->index('id_order');
-            $table->enum('jenis_tanda_pengenal', ['KTP', 'SIM', 'KK', '']);
-            $table->string('nomor_tanda_pengenal', 30);
             $table->string('nama_lengkap', 100);
+            $table->enum('jenis_tanda_pengenal', ['KTP', 'SIM', 'KK']);
+            $table->string('nomor_tanda_pengenal', 30);
             $table->string('alamat', 300);
         });
     }

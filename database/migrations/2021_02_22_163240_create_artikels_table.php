@@ -15,10 +15,11 @@ class CreateArtikelsTable extends Migration
     {
         Schema::create('artikels', function (Blueprint $table) {
             $table->integer('id_artikel')->primary();
-            $table->string('penulis', 300);
             $table->string('judul', 300);
+            $table->string('penulis', 300);
             $table->string('kategori', 300);
             $table->text('isi');
+            $table->string('foto', 30);
             $table->integer('durasi_baca');
         });
     }

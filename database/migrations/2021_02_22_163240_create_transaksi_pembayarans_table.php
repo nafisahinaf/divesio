@@ -15,6 +15,7 @@ class CreateTransaksiPembayaransTable extends Migration
     {
         Schema::create('transaksi_pembayarans', function (Blueprint $table) {
             $table->integer('id_transaksi')->primary();
+            $table->integer('id_user')->index('fk_transaksi_user');
             $table->float('nominal', 30, 0);
             $table->integer('batas_wkt_pembayaran');
             $table->enum('status', ['Berhasil', 'Menunggu pembayaran', 'Gagal', '']);
