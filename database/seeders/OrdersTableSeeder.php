@@ -44,7 +44,7 @@ class OrdersTableSeeder extends Seeder
                 'id_user' => 2,
                 'id_paket' => 1,
                 'jumlah_paket' => 1,
-                'status' => '',
+                'status' => 'Batal',
             ),
         ));
         

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDivecentersTable extends Migration
+class CreateDiveCentersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateDivecentersTable extends Migration
      */
     public function up()
     {
-        Schema::create('divecenters', function (Blueprint $table) {
+        Schema::create('dive_centers', function (Blueprint $table) {
             $table->integer('id_dive_center', true);
-            $table->string('nama');
-            $table->string('lokasi');
+            $table->integer('id_user')->index('id_user');
+            $table->string('nama', 255);
+            $table->string('lokasi', 255);
             $table->text('about');
-            $table->string('informasi_kontak');
+            $table->string('informasi_kontak', 255);
+            $table->string('foto_dive_center', 30);
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateDivecentersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('divecenters');
+        Schema::dropIfExists('dive_centers');
     }
 }
