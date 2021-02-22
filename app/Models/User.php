@@ -1,43 +1,85 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * 
+ * @property int $id_user
+ * @property int $id_role
+ * @property string $name
+ * @property string $email
+ * @property Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Role $role
+ * @property Collection|DiveCenter[] $dive_centers
+ * @property Collection|Feedback[] $feedback
+ * @property Collection|Order[] $orders
+ * @property Collection|TransaksiPembayaran[] $transaksi_pembayarans
+ *
+ * @package App\Models
+ */
+class User extends Model
 {
-    use HasFactory, Notifiable;
+	protected $table = 'users';
+	protected $primaryKey = 'id_user';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	protected $casts = [
+		'id_role' => 'int'
+	];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	protected $dates = [
+		'email_verified_at'
+	];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	protected $hidden = [
+		'password',
+		'remember_token'
+	];
+
+	protected $fillable = [
+		'id_role',
+		'name',
+		'email',
+		'email_verified_at',
+		'password',
+		'remember_token'
+	];
+
+	public function roles()
+	{
+		return $this->belongsTo(Role::class, 'id_role');
+	}
+
+	public function dive_centers()
+	{
+		return $this->hasMany(DiveCenter::class, 'id_user');
+	}
+
+	public function feedbacks()
+	{
+		return $this->hasMany(Feedback::class, 'id_user');
+	}
+
+	public function orders()
+	{
+		return $this->hasMany(Order::class, 'id_user');
+	}
+
+	public function transaksi_pembayarans()
+	{
+		return $this->hasMany(TransaksiPembayaran::class, 'id_user');
+	}
 }

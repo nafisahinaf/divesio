@@ -48,7 +48,7 @@
 
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li><a href="/home">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li><a href="/divesites">Dive Sites</a></li>
                             <!-- Dropdown -->
                             <li class="dropdown">
@@ -210,7 +210,26 @@
                 </div>
                 <div class="row ">
                     <div class="inspirasi-list">
+                        @foreach ($paketselam as $pktselam)
                         <div class="product-card">
+                            <div class="product-tumb">
+                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
+                            </div>
+                            <div class="product-details">
+                                <h4><a href="/detailpaket">{{$pktselam->nama_paket}}</a></h4>
+                                <span class="product-catagory">{{$pktselam->kategori}}</span>
+                                <div class="product-bottom-details">
+                                    <div class="product-price"><small>Mulai dari</small> IDR {{$pktselam->harga}}</div>
+                                    <div class="product-links">
+                                        <a href=""><i class="fa fa-heart"></i></a>
+                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>   
+                            </div>
+                            @endforeach
+                        </div>
+                        
+                        {{-- <div class="product-card">
                             <div class="product-tumb">
                                 <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
                             </div>
@@ -225,120 +244,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-tumb">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
-                            </div>
-                            <div class="product-details">
-                                <h4><a href="#">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory">Open Diving</span>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-tumb">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
-                            </div>
-                            <div class="product-details">
-                                <h4><a href="#">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory">Open Diving</span>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-tumb">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
-                            </div>
-                            <div class="product-details">
-                                <h4><a href="#">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory">Open Diving</span>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-tumb">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
-                            </div>
-                            <div class="product-details">
-                                <h4><a href="#">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory">Open Diving</span>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-tumb">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
-                            </div>
-                            <div class="product-details">
-                                <h4><a href="#">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory">Open Diving</span>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-tumb">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
-                            </div>
-                            <div class="product-details">
-                                <h4><a href="#">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory">Open Diving</span>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-tumb">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
-                            </div>
-                            <div class="product-details">
-                                <h4><a href="#">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory">Open Diving</span>
-                                <div class="product-bottom-details">
-                                    <div class="product-price"><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links">
-                                        <a href=""><i class="fa fa-heart"></i></a>
-                                        <a href=""><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        </div>  --}}
                     </div>
                 </div>
                 <a href="#" class="mt-40 genric-btn biru circle arrow">Paket Lain<span class="lnr lnr-arrow-right"></span></a>

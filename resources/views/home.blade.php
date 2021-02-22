@@ -48,7 +48,7 @@
 
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li><a href="/divesites">Dive Sites</a></li>
                             <!-- Dropdown -->
                             <li class="dropdown">
@@ -56,8 +56,8 @@
 								        Blog
 								      </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/artikel">Artikel</a>
-                                    <a class="dropdown-item" href="/inspirasi">Inspirasi</a>
+                                    <a class="dropdown-item" href="{{url('/artikel')}}">Artikel</a>
+                                    <a class="dropdown-item" href="{{url('/inspirasi')}}">Inspirasi</a>
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -65,8 +65,8 @@
 								        About
 								      </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/about">DIVESIO</a>
-                                    <a class="dropdown-item" href="/sustainabletourism">Sustainable Tourism</a>
+                                    <a class="dropdown-item" href={{url('/about')}}>DIVESIO</a>
+                                    <a class="dropdown-item" href={{url('/sustainabletourism')}}>Sustainable Tourism</a>
                                 </div>
                             </li>
                             <li><a href="#">Login</a></li>

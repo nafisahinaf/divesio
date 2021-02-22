@@ -48,7 +48,7 @@
 
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li><a href="/home">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li><a href="/divesites">Dive Sites</a></li>
                             <!-- Dropdown -->
                             <li class="dropdown">
