@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\DiveCenterController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,30 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/', [PageController::class,'home']);
+Route::get('/detaildivecenter', [PageController::class,'detaildivecenter']);
+Route::get('/detailpaket', [PageController::class,'detailpaket']);
+Route::get('/about', [PageController::class,'about']);
+Route::get('/artikel', [PageController::class,'artikel']);
 
-Route::get('/divesites', function () {
-    return view('divesites');
-});
+Route::get('/detailartikel', [PageController::class,'detailartikel']);
 
-Route::get('/detaildivecenter', function () {
-    return view('detaildivecenter');
-});
 
-Route::get('/detailpaket', function () {
-    return view('detailpaket');
-});
+Route::get('/divecenter', [DiveCenterController::class,'index']);
 
-Route::get('/about', function () {
-    return view('about');
-});
-
-Route::get('/artikel', function () {
-    return view('artikel');
-});
-
-Route::get('/detailartikel', function () {
-    return view('detailartikel');
-});
+Route::get('/daftardivecenter',[DiveCenterController::class,'getDataDiveCenter']);
