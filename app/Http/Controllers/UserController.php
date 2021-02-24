@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
+use Auth;
 
 class UserController extends Controller
 {
@@ -81,5 +83,41 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+        $credentials = request(['email', 'password']);
+        if ($validator->fails()) {    
+            return response()->json([
+                'status' => 'Failed',
+                'message' => $validator->messages()
+            ],422);
+        }else{
+            if(Auth::attempt($credentials)){
+                $user = $request->user();
+                $tokenResult = $user->createToken('Personal Access Token');
+                $token = $tokenResult->token;
+                $token->save();
+                
+                // if($user->id_role == 4){
+                    $users = $user->toArray();
+                    return response()->json([
+                        'status' => 'Success',
+                        'token' => $tokenResult->accessToken,
+                        // 'id_role' =>array_values($users)[0]['id_role'],
+                    ]);
+                // }
+            }else{
+                return response()->json([   
+                    'status' => 'Failed',
+                    'message' => 'Your Credintial are wrong!'
+                ], 401);
+            }
+        }
     }
 }

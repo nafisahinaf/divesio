@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Paketselam;
 use App\Models\DiveCenter;
+use Auth; 
 
 class DiveCenterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +35,11 @@ class DiveCenterController extends Controller
      */
     public function create(request $request)
     {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        
         $divecenter= new DiveCenter;
+        $divecenter->id_user = $id;
         $divecenter->nama = $request->nama;
         $divecenter->lokasi = $request->lokasi;
         $divecenter->about = $request->about;
@@ -38,7 +47,11 @@ class DiveCenterController extends Controller
         $divecenter->foto_dive_center = $request->foto_dive_center;
         $divecenter->save();
 
-        return 'Data berhasil masuk';
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Dive Center Berhasil dibuat'
+       ]);
+        // dd($auth);
     }
 
     /**
@@ -97,7 +110,11 @@ class DiveCenterController extends Controller
         $divecenter->foto_dive_center = $foto_dive_center;
         $divecenter->save();
 
-        return 'Data berhasil diupdate';
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Dive Center Berhasil di update'
+       ]);
+       
     }
 
     public function delete($id)
@@ -105,7 +122,10 @@ class DiveCenterController extends Controller
         $divecenter=  DiveCenter::find($id);
         $divecenter->delete();
 
-        return 'Data berhasil dihapus';
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Dive Center Berhasil di hapus'
+       ]);
     }
     /**
      * Remove the specified resource from storage.
