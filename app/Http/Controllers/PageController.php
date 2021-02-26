@@ -10,6 +10,11 @@ class PageController extends Controller
         return view ('home');
     }
     
+    public function divesites()
+    {
+        return view ('divesites');
+    }
+
     public function detaildivecenter()
     {
         return view ('detaildivecenter');

@@ -229,7 +229,7 @@
                             @endforeach
                         </div>
                         
-                        {{-- <div class="product-card">
+                        <!-- <div class="product-card">
                             <div class="product-tumb">
                                 <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1" alt="">
                             </div>
@@ -244,7 +244,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  --}}
+                        </div>  -->
                     </div>
                 </div>
                 <a href="#" class="mt-40 genric-btn biru circle arrow">Paket Lain<span class="lnr lnr-arrow-right"></span></a>

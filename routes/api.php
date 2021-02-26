@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/divecenter',[DiveCenterController::class,'index']);
-Route::post('/divecenter',[DiveCenterController::class,'create']);
-Route::put('/divecenter/{$id}',[DiveCenterController::class,'update']);
-Route::delete('/divecenter/{$id}',[DiveCenterController::class,'delete']);
+Route::get('/divesites',[DiveCenterController::class,'index']);
+Route::post('/divesites',[DiveCenterController::class,'create']);
+Route::put('/divesites/{$id}',[DiveCenterController::class,'update']);
+Route::delete('/divesites/{$id}',[DiveCenterController::class,'delete']);

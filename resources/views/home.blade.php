@@ -48,8 +48,8 @@
 
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/divesites">Dive Sites</a></li>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="{{url('/divesites')}}">Dive Sites</a></li>
                             <!-- Dropdown -->
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -105,7 +105,7 @@
             <div class="row d-flex justify-content-center ">
                 <div class="menu-content pb-40 col-lg-8 ">
                     <div class="title-biru text-center ">
-                        <h1 class="mb-10 ">Artikel Pilihan</h1>
+                        <h1 class="mb-10 ">Artikel Terbaru</h1>
                         <p>Cari tahu lebih banyak tentang wisata bahari Indonesia!</p>
                     </div>
                 </div>
