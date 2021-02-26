@@ -38,11 +38,11 @@
     <!-- start banner Area -->
     <section class="banner-area" id="home">
         <!-- Start Header Area -->
-        <header class="default-header-detail">
+        <header class="default-header">
             <nav class="navbar navbar-expand-lg  navbar-light">
                 <div class="container">
-                    <a class="navbar-brand" href="/home">
-                        <img src="{{asset('img/DIVESIO (1) - putih.png')}}" width="95px" alt="logo-divesio">
+                    <a class="navbar-brand" href="#">
+                    <img src="{{asset('img/DIVESIO (1) - putih.png')}}" width="95px" alt="logo-divesio">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							    <span class="text-white lnr lnr-menu"></span>
@@ -50,16 +50,16 @@
 
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/divesites">Dive Sites</a></li>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="{{url('/divecenter')}}">Dive Center</a></li>
                             <!-- Dropdown -->
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 								        Blog
 								      </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/artikel">Artikel</a>
-                                    <a class="dropdown-item" href="/inspirasi">Inspirasi</a>
+                                    <a class="dropdown-item" href="{{url('/artikel')}}">Artikel</a>
+                                    <a class="dropdown-item" href="{{url('/inspirasi')}}">Inspirasi</a>
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -67,8 +67,8 @@
 								        About
 								      </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/about">DIVESIO</a>
-                                    <a class="dropdown-item" href="/sustainable-tourism">Sustainable Tourism</a>
+                                    <a class="dropdown-item" href={{url('/about')}}>DIVESIO</a>
+                                    <a class="dropdown-item" href={{url('/sustainabletourism')}}>Sustainable Tourism</a>
                                 </div>
                             </li>
                             <li><a href="#">Login</a></li>

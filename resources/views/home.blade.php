@@ -49,7 +49,7 @@
                     <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li><a href="{{url('/')}}">Home</a></li>
-                            <li><a href="{{url('/divesites')}}">Dive Sites</a></li>
+                            <li><a href="{{url('/divecenter')}}">Dive Center</a></li>
                             <!-- Dropdown -->
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

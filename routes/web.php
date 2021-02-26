@@ -24,6 +24,6 @@ Route::get('/artikel', [PageController::class,'artikel']);
 Route::get('/detailartikel', [PageController::class,'detailartikel']);
 
 
-Route::get('/divesites', [DiveCenterController::class,'index']);
+Route::get('/divecenter', [DiveCenterController::class,'index']);
 
 Route::get('/daftardivecenter',[DiveCenterController::class,'getDataDiveCenter']);
