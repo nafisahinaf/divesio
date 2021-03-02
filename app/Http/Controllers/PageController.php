@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\User;
 
 class PageController extends Controller
 {
@@ -12,7 +14,9 @@ class PageController extends Controller
     
     public function home()
     {
-        return view ('home');
+        $auth = Auth::user();
+        dd($auth->id_user);
+        // return view ('home');
     }
     
     public function detaildivecenter()

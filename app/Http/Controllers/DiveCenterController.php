@@ -96,22 +96,18 @@ class DiveCenterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $nama = $request->nama;
-        $lokasi = $request->lokasi;
-        $about = $request->about;
-        $informasi_kontak = $request->informasi_kontak;
-        $foto_dive_center = $request->foto_dive_center;
+       
 
-        $divecenter = DiveCenter::find($id);
-        $divecenter->nama = $nama;
-        $divecenter->lokasi = $lokasi;
-        $divecenter->about = $about;
-        $divecenter->informasi_kontak = $informasi_kontak;
-        $divecenter->foto_dive_center = $foto_dive_center;
+        $divecenter = DiveCenter::findorFail($id);
+        $divecenter->nama = $request->nama;
+        $divecenter->lokasi = $request->lokasi;
+        $divecenter->about = $request->about;
+        $divecenter->informasi_kontak = $request->informasi_kontak;
+        $divecenter->foto_dive_center = $request->foto_dive_center;
         $divecenter->save();
 
         return response()->json([
-            'status' => 'Success',
+            'status' => $divecenter,
             'message' => 'Dive Center Berhasil di update'
        ]);
        
