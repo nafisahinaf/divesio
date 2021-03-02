@@ -22,6 +22,7 @@ class CreateDiveCentersTable extends Migration
             $table->string('no_hp', 30);
             $table->string('email', 30);
             $table->binary('foto_dive_center');
+            $table->enum('status', ['is_verified', 'failed', 'pending']);
             $table->timestamps();
         });
     }

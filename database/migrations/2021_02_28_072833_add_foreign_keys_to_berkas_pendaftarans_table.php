@@ -14,7 +14,7 @@ class AddForeignKeysToBerkasPendaftaransTable extends Migration
     public function up()
     {
         Schema::table('berkas_pendaftarans', function (Blueprint $table) {
-            $table->foreign('id_pendaftaran', 'fk_berkaspendaftaran_pendaftaran')->references('id_pendaftaran')->on('pendaftaran_divecenters')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign('id_dive_center', 'fk_berkaspendaftaran_divecenter')->references('id_dive_center')->on('dive_centers')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -26,7 +26,7 @@ class AddForeignKeysToBerkasPendaftaransTable extends Migration
     public function down()
     {
         Schema::table('berkas_pendaftarans', function (Blueprint $table) {
-            $table->dropForeign('fk_berkaspendaftaran_pendaftaran');
+            $table->dropForeign('fk_berkaspendaftaran_divecenter');
         });
     }
 }

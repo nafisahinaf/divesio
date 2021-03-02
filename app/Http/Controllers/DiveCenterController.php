@@ -30,6 +30,9 @@ class DiveCenterController extends Controller
         $id = $auth->id_user;
 
         $diveCenter = DiveCenter::where('id_user',$id)->first();
+        //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
+        //first untuk objek pertama bukan bentuk array
+        
 
         // return $diveCenter;
         

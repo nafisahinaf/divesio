@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $no_hp
  * @property string $email
  * @property boolean $foto_dive_center
+ * @property string $status
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -47,7 +48,8 @@ class DiveCenter extends Model
 		'about',
 		'no_hp',
 		'email',
-		'foto_dive_center'
+		'foto_dive_center',
+		'status'
 	];
 
 	public function user()
@@ -64,4 +66,10 @@ class DiveCenter extends Model
 	{
 		return $this->hasMany(FasilitasDivecenter::class, 'id_dive_center');
 	}
+	
+	public function berkas_pendaftarans()
+	{
+		return $this->hasMany(BerkasPendaftaran::class, 'id_dive_center');
+	}
+	
 }

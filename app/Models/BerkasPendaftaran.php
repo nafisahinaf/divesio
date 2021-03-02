@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class BerkasPendaftaran
  * 
  * @property int $id_berkas
- * @property int $id_pendaftaran
+ * @property int $id_dive_center
  * @property string $nama_berkas
  * @property boolean $file_berkas
  * 
@@ -29,18 +29,18 @@ class BerkasPendaftaran extends Model
 
 	protected $casts = [
 		'id_berkas' => 'int',
-		'id_pendaftaran' => 'int',
+		'id_dive_center' => 'int',
 		'file_berkas' => 'boolean'
 	];
 
 	protected $fillable = [
-		'id_pendaftaran',
+		'id_dive_center',
 		'nama_berkas',
 		'file_berkas'
 	];
 
-	public function pendaftaran_divecenter()
+	public function divecenter()
 	{
-		return $this->belongsTo(PendaftaranDivecenter::class, 'id_pendaftaran');
+		return $this->belongsTo(DiveCenter::class, 'id_dive_center');
 	}
 }

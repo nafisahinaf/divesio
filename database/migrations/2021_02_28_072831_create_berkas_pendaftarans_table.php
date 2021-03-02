@@ -15,7 +15,7 @@ class CreateBerkasPendaftaransTable extends Migration
     {
         Schema::create('berkas_pendaftarans', function (Blueprint $table) {
             $table->integer('id_berkas')->primary();
-            $table->integer('id_pendaftaran')->index('id_pendaftaran');
+            $table->integer('id_dive_center')->index('id_dive_center');
             $table->string('nama_berkas', 30);
             $table->binary('file_berkas');
         });
