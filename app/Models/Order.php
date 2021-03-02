@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_transaksi
  * @property int $id_user
  * @property int $id_paket
+ * @property int $id_jadwal
  * @property int $jumlah_paket
  * @property string $status
  * 
@@ -37,6 +38,7 @@ class Order extends Model
 		'id_transaksi' => 'int',
 		'id_user' => 'int',
 		'id_paket' => 'int',
+		'id_jadwal' => 'int',
 		'jumlah_paket' => 'int'
 	];
 
@@ -44,34 +46,32 @@ class Order extends Model
 		'id_transaksi',
 		'id_user',
 		'id_paket',
+		'id_jadwal',
 		'jumlah_paket',
 		'status'
 	];
 
-	public function paket_selams()
+	public function paket_selam()
 	{
 		return $this->belongsTo(PaketSelam::class, 'id_paket');
 	}
 
-	public function transaksi_pembayarans()
+	public function transaksi_pembayaran()
 	{
 		return $this->belongsTo(TransaksiPembayaran::class, 'id_transaksi');
 	}
 
-	public function users()
+	public function user()
 	{
 		return $this->belongsTo(User::class, 'id_user');
 	}
-	public function orders()
-	{
-		return $this->belongsTo(Order::class, 'id_order');
-	}
+
 	public function data_diri_pemesans()
 	{
 		return $this->hasMany(DataDiriPemesan::class, 'id_order');
 	}
 
-	public function feedbacks()
+	public function feedback()
 	{
 		return $this->hasMany(Feedback::class, 'id_order');
 	}

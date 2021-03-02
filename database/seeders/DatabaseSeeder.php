@@ -23,5 +23,14 @@ class DatabaseSeeder extends Seeder
         $this->call(OrdersTableSeeder::class);
         $this->call(DataDiriPemesansTableSeeder::class);
         $this->call(FeedbacksTableSeeder::class);
+        $this->call(ArtikelUsersTableSeeder::class);
+        $this->call(ArtikelsTableSeeder::class);
+        $this->call(PendaftaranDivecentersTableSeeder::class);
+        $this->call(BerkasPendaftaransTableSeeder::class);
+        $this->call(FasilitasCentersTableSeeder::class);
+        $this->call(FasilitasDivecentersTableSeeder::class);
+        $this->call(FasilitasPaketsTableSeeder::class);
+        $this->call(FasilitasPaketSelamsTableSeeder::class);
+        $this->call(PersyaratanPaketsTableSeeder::class);
     }
 }

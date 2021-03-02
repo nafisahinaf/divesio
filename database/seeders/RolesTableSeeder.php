@@ -22,22 +22,17 @@ class RolesTableSeeder extends Seeder
             0 => 
             array (
                 'id_role' => 1,
-                'jenis_role' => 'pemesan_guest',
+                'jenis_role' => 'admin',
             ),
             1 => 
             array (
                 'id_role' => 2,
-                'jenis_role' => 'pemesan_login',
+                'jenis_role' => 'dive_center',
             ),
             2 => 
             array (
                 'id_role' => 3,
-                'jenis_role' => 'admin',
-            ),
-            3 => 
-            array (
-                'id_role' => 4,
-                'jenis_role' => 'dive_center',
+                'jenis_role' => 'pemesan',
             ),
         ));
         

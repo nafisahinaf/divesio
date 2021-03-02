@@ -14,113 +14,73 @@ class DiveCenterController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function getAllPaketSelam()
     {
         // $paketselam = DB::table('paketselam')->get();
         // dd($paketselam);
         // $paketselam = Paketselam::all();
         // return view ('divesites',['paketselam' => $paketselam]);
-        return Paketselam::all();
+        return PaketSelam::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(request $request)
+    public function createPaketSelam(request $request)
     {
         $auth = Auth::user();
         $id = $auth->id_user;
         
-        $divecenter= new DiveCenter;
-        $divecenter->id_user = $id;
-        $divecenter->nama = $request->nama;
-        $divecenter->lokasi = $request->lokasi;
-        $divecenter->about = $request->about;
-        $divecenter->informasi_kontak = $request->informasi_kontak;
-        $divecenter->foto_dive_center = $request->foto_dive_center;
-        $divecenter->save();
+        $paketselam= new PaketSelam;
+        $paketselam->id_dive_center = $request->id_dive_center;
+        $paketselam->nama_paket = $request->nama_paket;
+        $paketselam->deskripsi = $request->deskripsi;
+        $paketselam->ketersediaan = $request->ketersediaan;
+        $paketselam->kuota_peserta = $request->kuota_peserta;
+        $paketselam->foto = $request->foto;
+        $paketselam->harga = $request->harga;
+        $paketselam->save();
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Dive Center Berhasil dibuat'
+            'message' => 'Paket selam berhasil dibuat'
        ]);
         // dd($auth);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-       //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function editPaketSelam(Request $request, $id)
     {
        
 
-        $divecenter = DiveCenter::findorFail($id);
-        $divecenter->nama = $request->nama;
-        $divecenter->lokasi = $request->lokasi;
-        $divecenter->about = $request->about;
-        $divecenter->informasi_kontak = $request->informasi_kontak;
-        $divecenter->foto_dive_center = $request->foto_dive_center;
-        $divecenter->save();
+        $nama_paket = $request->nama_paket;
+        $deskripsi = $request->deskripsi;
+        $ketersediaan = $request->ketersediaan;
+        $kuota_peserta = $request->kuota_peserta;
+        $foto = $request->foto;
+        $harga = $request->harga;
+
+        $paketselam = PaketSelam::find($id);
+        $paketselam->nama_paket = $nama_paket;
+        $paketselam->deskripsi = $deskripsi;
+        $paketselam->ketersediaan = $ketersediaan;
+        $paketselam->kuota_peserta = $kuota_peserta;
+        $paketselam->foto = $foto;
+        $paketselam->harga = $harga;
+        $paketselam->save();
 
         return response()->json([
-            'status' => $divecenter,
-            'message' => 'Dive Center Berhasil di update'
+            'status' => 'Success',
+            'message' => 'Paket selam berhasil di update'
        ]);
        
     }
 
-    public function delete($id)
+    public function deletePaketSelam($id)
     {
-        $divecenter=  DiveCenter::find($id);
-        $divecenter->delete();
+        $paketselam=  PaketSelam::find($id);
+        $paketselam->delete();
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'Dive Center Berhasil di hapus'
+            'message' => 'Paket Selam berhasil di hapus'
        ]);
     }
     /**
@@ -134,36 +94,4 @@ class DiveCenterController extends Controller
         //
     }
 
-    
-
-    //daftar dive center
-    public function getDaftarDiveCenter(){
-        $auth = Auth::user()->dive_center;
-        $id = $auth->id_dive_center;
-
-        $daftarDiveCenter = DaftarDiveCenter::with('divecenter.users')
-                        ->where('id_dive_center',$id)
-                        ->get();
-
-        return response()->json([
-            'status' => 'Success',
-            'data' => [
-                'daftar_dive_center' => $daftarDiveCenter
-            ],
-        ]);
-    }
-
-    //detail dive center
-    public function detailDiveCenter($id_dive_center){
-        $anggota = User::with('anggota')
-                  ->select('username','email','id_user') 
-                  ->findOrFail($id_user);
-
-        return response()->json([
-            'status' => 'Success',
-            'data' => [
-                'anggota' => $anggota
-            ],
-        ]);
-    }
 }

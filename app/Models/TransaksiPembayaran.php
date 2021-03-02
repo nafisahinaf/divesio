@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id_transaksi
  * @property int $id_user
+ * @property int $id_order
  * @property float $nominal
  * @property int $batas_wkt_pembayaran
  * @property string $status
@@ -33,12 +34,14 @@ class TransaksiPembayaran extends Model
 	protected $casts = [
 		'id_transaksi' => 'int',
 		'id_user' => 'int',
+		'id_order' => 'int',
 		'nominal' => 'float',
 		'batas_wkt_pembayaran' => 'int'
 	];
 
 	protected $fillable = [
 		'id_user',
+		'id_order',
 		'nominal',
 		'batas_wkt_pembayaran',
 		'status'
