@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('id_transaksi');
             $table->integer('id_user')->index('fk_order_user');
             $table->integer('id_paket')->index('fk_order_paket');
+            $table->integer('id_jadwal')->index('id_jadwal');
             $table->integer('jumlah_paket');
             $table->enum('status', ['Berhasil', 'Batal']);
             $table->index(['id_transaksi', 'id_user'], 'id_transaksi');

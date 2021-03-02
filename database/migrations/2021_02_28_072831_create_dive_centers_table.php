@@ -19,8 +19,9 @@ class CreateDiveCentersTable extends Migration
             $table->string('nama', 255);
             $table->string('lokasi', 255);
             $table->text('about');
-            $table->string('informasi_kontak', 255);
-            $table->string('foto_dive_center', 30);
+            $table->string('no_hp', 30);
+            $table->string('email', 30);
+            $table->binary('foto_dive_center');
             $table->timestamps();
         });
     }

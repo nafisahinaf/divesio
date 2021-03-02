@@ -6,45 +6,34 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class JadwalPaket
+ * Class PersyaratanPaket
  * 
- * @property int $id_jadwal
+ * @property int $id_persyaratan
  * @property int $id_paket
- * @property Carbon $tanggal
- * @property Carbon $jam_berangkat
- * @property int $durasi
+ * @property string $nama_persyaratan
  * 
  * @property PaketSelam $paket_selam
  *
  * @package App\Models
  */
-class JadwalPaket extends Model
+class PersyaratanPaket extends Model
 {
-	protected $table = 'jadwal_pakets';
-	protected $primaryKey = 'id_jadwal';
+	protected $table = 'persyaratan_paket';
+	protected $primaryKey = 'id_persyaratan';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id_jadwal' => 'int',
-		'id_paket' => 'int',
-		'durasi' => 'int'
-	];
-
-	protected $dates = [
-		'tanggal',
-		'jam_berangkat'
+		'id_persyaratan' => 'int',
+		'id_paket' => 'int'
 	];
 
 	protected $fillable = [
 		'id_paket',
-		'tanggal',
-		'jam_berangkat',
-		'durasi'
+		'nama_persyaratan'
 	];
 
 	public function paket_selam()

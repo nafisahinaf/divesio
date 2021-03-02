@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DiveCenterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Htpp\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth:api']], function(){
-    Route::get('/divecenter',[DiveCenterController::class,'index']);
-    Route::post('/divecenter',[DiveCenterController::class,'create']);
-    Route::put('/divecenter/{$id}',[DiveCenterController::class,'update']);
-    Route::delete('/divecenter/{$id}',[DiveCenterController::class,'delete']);
+    Route::get('/get-all-dive-center',[AdminController::class,'getAllDiveCenter']);
+    Route::post('/create-dive-center',[AdminController::class,'createDiveCenter']);
+    Route::put('/edit-dive-center/{id}',[AdminController::class,'updateDiveCenter']);
+    Route::delete('/delete-dive-center/{id}',[AdminController::class,'deleteDiveCenter']);
+    
+    Route::get('/get-all-paket-selam',[DiveCenterController::class,'getAllPaketSelam']);
+    Route::post('/create-paket-selam',[DiveCenterController::class,'createPaketSelam']);
+    Route::put('/edit-paket-selam/{id}',[DiveCenterController::class,'updatePaketSelam']);
+    Route::delete('/delete-paket-selam/{id}',[DiveCenterController::class,'deletePaketSelam']);
+
+
 });
 
 Route::group([

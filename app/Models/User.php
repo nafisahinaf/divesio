@@ -27,9 +27,11 @@ use Laravel\Passport\HasApiTokens;
  * @property Carbon|null $updated_at
  * 
  * @property Role $role
+ * @property Collection|Artikel[] $artikels
  * @property Collection|DiveCenter[] $dive_centers
  * @property Collection|Feedback[] $feedback
  * @property Collection|Order[] $orders
+ * @property Collection|PendaftaranDivecenter[] $pendaftaran_divecenters
  * @property Collection|TransaksiPembayaran[] $transaksi_pembayarans
  *
  * @package App\Models
@@ -63,9 +65,15 @@ class User extends Authenticatable
 		'remember_token'
 	];
 
-	public function roles()
+	public function role()
 	{
 		return $this->belongsTo(Role::class, 'id_role');
+	}
+
+	public function artikels()
+	{
+		return $this->belongsToMany(Artikel::class, 'artikel_users', 'id_user', 'id_artikel')
+					->withPivot('id_artikel_user');
 	}
 
 	public function dive_centers()
@@ -73,7 +81,7 @@ class User extends Authenticatable
 		return $this->hasMany(DiveCenter::class, 'id_user');
 	}
 
-	public function feedbacks()
+	public function feedback()
 	{
 		return $this->hasMany(Feedback::class, 'id_user');
 	}
@@ -81,6 +89,11 @@ class User extends Authenticatable
 	public function orders()
 	{
 		return $this->hasMany(Order::class, 'id_user');
+	}
+
+	public function pendaftaran_divecenters()
+	{
+		return $this->hasMany(PendaftaranDivecenter::class, 'id_user');
 	}
 
 	public function transaksi_pembayarans()
