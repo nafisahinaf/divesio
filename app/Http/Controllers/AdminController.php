@@ -82,6 +82,73 @@ class AdminController extends Controller
             'message' => 'Dive Center Berhasil di hapus'
        ]);
     }
+
+    public function getAllArtikel()
+    {
+        // $paketselam = DB::table('paketselam')->get();
+        // dd($paketselam);
+        // $paketselam = Paketselam::all();
+        // return view ('divesites',['paketselam' => $paketselam]);
+        return Artikel::all();
+    }
+
+    public function Artikel(request $request)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        
+        $artikel= new Artikel;
+        $artikel->judul = $request->judul;
+        $artikel->penulis = $request->penulis;
+        $artikel->kategori = $request->kategori;
+        $artikel->isi = $request->isi;
+        $artikel->foto = $request->foto;
+        $artikel->durasi_baca = $request->durasi_baca;
+        $artikel->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Artikel berhasil dibuat'
+       ]);
+        // dd($auth);
+    }
+    
+    public function editArtikel(Request $request, $id)
+    {
+        $judul = $request->judul;
+        $penulis = $request->penulis;
+        $kategori = $request->kategori;
+        $isi = $request->isi;
+        $foto = $request->foto;
+        $durasi_baca = $request->durasi_baca;
+
+        $artikel = Artikel::find($id);
+        $artikel->judul = $judul;
+        $artikel->pnulis = $penulis;
+        $artikel->kategori = $kategori;
+        $artikel->isi = $isi;
+        $artikel->foto = $foto;
+        $artikel->durasi_baca = $durasi_baca;
+        $artikel->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Artikel berhasil di update'
+       ]);
+       
+    }
+
+    public function deleteArtikel($id)
+    {
+        $artikel=  Artikel::find($id);
+        $artikel->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Artikel berhasil di hapus'
+       ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
