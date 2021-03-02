@@ -14,7 +14,7 @@ class CreatePaketSelamsTable extends Migration
     public function up()
     {
         Schema::create('paket_selams', function (Blueprint $table) {
-            $table->integer('id_paket')->primary();
+            $table->integer('id_paket',true);
             $table->integer('id_dive_center');
             $table->string('nama_paket', 100);
             $table->text('deskripsi');

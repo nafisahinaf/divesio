@@ -28,9 +28,13 @@ class DiveCenterController extends Controller
     {
         $auth = Auth::user();
         $id = $auth->id_user;
+
+        $diveCenter = DiveCenter::where('id_user',$id)->first();
+
+        // return $diveCenter;
         
         $paketselam= new PaketSelam;
-        $paketselam->id_dive_center = $request->id_dive_center;
+        $paketselam->id_dive_center = $diveCenter->id_dive_center;
         $paketselam->nama_paket = $request->nama_paket;
         $paketselam->deskripsi = $request->deskripsi;
         $paketselam->ketersediaan = $request->ketersediaan;
@@ -43,7 +47,6 @@ class DiveCenterController extends Controller
             'status' => 'Success',
             'message' => 'Paket selam berhasil dibuat'
        ]);
-        // dd($auth);
     }
     
     public function editPaketSelam(Request $request, $id)

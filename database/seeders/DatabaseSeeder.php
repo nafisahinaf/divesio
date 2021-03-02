@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ArtikelsTableSeeder::class);
         $this->call(PendaftaranDivecentersTableSeeder::class);
         $this->call(BerkasPendaftaransTableSeeder::class);
-        $this->call(FasilitasCentersTableSeeder::class);
         $this->call(FasilitasDivecentersTableSeeder::class);
-        $this->call(FasilitasPaketsTableSeeder::class);
+        $this->call(FasilitasCentersTableSeeder::class);
         $this->call(FasilitasPaketSelamsTableSeeder::class);
+        $this->call(FasilitasPaketsTableSeeder::class);
         $this->call(PersyaratanPaketsTableSeeder::class);
     }
 }

@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Ecodive Bali Diving',
                 'email' => 'ecodive@gmail.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$10$3UaTEPyYGLUQIeqVwZ8AQuu39YgrVyayjdo3rzRgJ6nUJK59//.jG',
+                'password' => bcrypt('12345678'),
                 'remember_token' => NULL,
                 'created_at' => '2021-02-21 00:51:59',
                 'updated_at' => NULL,

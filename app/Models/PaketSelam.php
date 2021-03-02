@@ -34,11 +34,9 @@ class PaketSelam extends Model
 {
 	protected $table = 'paket_selams';
 	protected $primaryKey = 'id_paket';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id_paket' => 'int',
 		'id_dive_center' => 'int',
 		'kuota_peserta' => 'int',
 		'harga' => 'float'
