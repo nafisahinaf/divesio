@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_berkas
  * @property int $id_dive_center
  * @property string $nama_berkas
- * @property boolean $file_berkas
+ * @property string $file_berkas
  * 
  * @property PendaftaranDivecenter $pendaftaran_divecenter
  *
@@ -30,7 +30,6 @@ class BerkasPendaftaran extends Model
 	protected $casts = [
 		'id_berkas' => 'int',
 		'id_dive_center' => 'int',
-		'file_berkas' => 'boolean'
 	];
 
 	protected $fillable = [
@@ -39,6 +38,16 @@ class BerkasPendaftaran extends Model
 		'file_berkas'
 	];
 
+	protected $appends = ['berkas_pendaftaran'];
+    
+    public function getBerkasPendaftaranAttribute()
+    {
+        if ($this->file_berkas == null) {
+            return 'berkas belum ada';
+        }
+        return asset('uploads/sertifikat/'.$this->file_berkas);
+    }   
+	
 	public function divecenter()
 	{
 		return $this->belongsTo(DiveCenter::class, 'id_dive_center');

@@ -18,6 +18,14 @@ class ArtikelUsersTableSeeder extends Seeder
 
         \DB::table('artikel_users')->delete();
         
+        \DB::table('artikel_users')->insert(array (
+            0 => 
+            array (
+                'id_artikel_user' => 1,
+                'id_artikel' => 1,
+                'id_user' => 1,
+            ),
+        ));
         
         
     }

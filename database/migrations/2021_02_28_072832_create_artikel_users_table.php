@@ -14,7 +14,7 @@ class CreateArtikelUsersTable extends Migration
     public function up()
     {
         Schema::create('artikel_users', function (Blueprint $table) {
-            $table->integer('id_artikel_user',true);
+            $table->integer('id_artikel_user', true);
             $table->integer('id_artikel');
             $table->integer('id_user')->index('fk_artikeluser_user');
             $table->index(['id_artikel', 'id_user'], 'id_artikel');

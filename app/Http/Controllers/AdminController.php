@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Paketselam;
 use App\Models\DiveCenter;
 use App\Models\Artikel;
+use App\Models\BerkasPendaftaran;
 use Auth; 
 
 class AdminController extends Controller
@@ -147,6 +148,15 @@ class AdminController extends Controller
             'status' => 'Success',
             'message' => 'Artikel berhasil di hapus'
        ]);
+    }
+
+    public function getAllBerkasPendaftaran()
+    {
+        // $paketselam = DB::table('paketselam')->get();
+        // dd($paketselam);
+        // $paketselam = Paketselam::all();
+        // return view ('divesites',['paketselam' => $paketselam]);
+        return BerkasPendaftaran::all();
     }
 
     /**

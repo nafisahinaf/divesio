@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('/create-artikel',[AdminController::class,'createArtikel']);
     Route::put('/edit-artikel/{id}',[AdminController::class,'updateArtikel']);
     Route::delete('/delete-artikel/{id}',[AdminController::class,'deleteArtikel']);
+    Route::get('/get-all-berkas-pendaftaran',[AdminController::class,'getAllBerkasPendaftaran']);
 
     Route::get('/get-all-paket-selam',[DiveCenterController::class,'getAllPaketSelam']);
     Route::post('/create-paket-selam',[DiveCenterController::class,'createPaketSelam']);

@@ -15,8 +15,8 @@ class PageController extends Controller
     public function home()
     {
         $auth = Auth::user();
-        dd($auth->id_user);
-        // return view ('home');
+        // dd($auth->id_user);
+        return view ('home');
     }
     
     public function detaildivecenter()

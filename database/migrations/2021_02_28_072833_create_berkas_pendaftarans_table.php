@@ -17,7 +17,7 @@ class CreateBerkasPendaftaransTable extends Migration
             $table->integer('id_berkas')->primary();
             $table->integer('id_dive_center')->index('id_dive_center');
             $table->string('nama_berkas', 30);
-            $table->binary('file_berkas');
+            $table->string('file_berkas');
         });
     }
 
