@@ -28,11 +28,9 @@ class Artikel extends Model
 {
 	protected $table = 'artikels';
 	protected $primaryKey = 'id_artikel';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id_artikel' => 'int',
 		'durasi_baca' => 'int'
 	];
 

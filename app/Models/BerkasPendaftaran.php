@@ -24,11 +24,11 @@ class BerkasPendaftaran extends Model
 {
 	protected $table = 'berkas_pendaftarans';
 	protected $primaryKey = 'id_berkas';
-	public $incrementing = false;
+	// public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id_berkas' => 'int',
+		// 'id_berkas' => 'int',
 		'id_dive_center' => 'int',
 	];
 

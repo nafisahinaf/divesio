@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Paketselam;
 use App\Models\DiveCenter;
+use App\Models\JadwalPaket;
+use App\Models\persyaratanPaket;
+use App\Models\FasilitasPaket;
 use Auth; 
 
 class DiveCenterController extends Controller
@@ -89,6 +92,165 @@ class DiveCenterController extends Controller
             'message' => 'Paket Selam berhasil di hapus'
        ]);
     }
+    //get jadwal paket yang dimiliki dive center login
+    public function listJadwalPaketDiveCenter(){
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $listJadwalPaket = PaketSelam::with('jadwal_paket','divecenter')
+                        ->whereHas('dive_center', function($q) use($id) {
+                            $q->where('id_user', '=', $id); 
+                        })
+                        // ->where('id_status',8)
+                        ->paginate(3);
+
+        return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'listjadwalpaket' => $listJadwalPaket
+            ],
+        ]);
+    }
+    public function getAllJadwalPaket()
+    {
+        // $paketselam = DB::table('paketselam')->get();
+        // dd($paketselam);
+        // $paketselam = Paketselam::all();
+        // return view ('divesites',['paketselam' => $paketselam]);
+        return JadwalPaket::all();
+    }
+
+    public function createJadwalPaket(request $request)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $diveCenter = DiveCenter::where('id_user',$id)->first();
+        //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
+        //first untuk objek pertama bukan bentuk array
+        
+
+        // return $diveCenter;
+        
+        $jadwalpaket= new JadwalPaket;
+        $jadwalpaket->id_paket = $request->id_paket;
+        $jadwalpaket->tanggal = $request->tanggal;
+        $jadwalpaket->jam_berangkat = $request->jam_berangkat;
+        $jadwalpaket->durasi = $request->durasi;
+        $jadwalpaket->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Jadwal Paket berhasil dibuat'
+       ]);
+    }
+    
+    public function updateJadwalPaket(Request $request, $id)
+    {
+        $id_paket = $request->id_paket;
+        $tanggal = $request->tanggal;
+        $jam_berangkat = $request->jam_berangkat;
+        $durasi = $request->durasi;
+
+        $jadwalpaket = JadwalPaket::find($id);
+        $jadwalpaket->id_paket = $id_paket;
+        $jadwalpaket->tanggal = $tanggal;
+        $jadwalpaket->jam_berangkat = $jam_berangkat;
+        $jadwalpaket->durasi = $durasi;
+        $jadwalpaket->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Jadwal Paket berhasil di update'
+       ]);
+       
+    }
+
+    public function deleteJadwalPaket($id)
+    {
+        $jadwalpaket=  JadwalPaket::find($id);
+        $jadwalpaket->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Jadwal Paket berhasil di hapus'
+       ]);
+    }
+
+    //get persyaratan paket tertentu
+    public function getPersyaratanPaket($id_paket)
+    {
+        $persyaratanpaket = PersyaratanPaket::with('paketselam')
+                         ->where('id_paket',$id_paket)
+                        //  ->where('id_status',7)
+                         ->get();
+        
+        return response()->json([
+            'status' => 'Success',
+            'size'  => sizeof($persyaratanpaket),
+            'data' => [
+                'persyaratanpaket' => $persyaratanpaket
+            ],
+        ]);
+    }
+
+    public function createPersyaratanPaket(request $request)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $diveCenter = DiveCenter::where('id_user',$id)->first();
+        //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
+        //first untuk objek pertama bukan bentuk array
+        
+
+        // return $diveCenter;
+        
+        $persyaratanpaket= new PersyaratanPaket;
+        $persyaratanpaket->id_paket = $request->id_paket;
+        $persyaratanpaket->nama_persyaratan = $request->nama_persyaratan;
+        $persyaratanpaket->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Persyaratan Paket berhasil dibuat'
+       ]);
+    }
+    
+    public function updatePersyaratanPaket(Request $request, $id)
+    {
+        $id_paket = $request->id_paket;
+        $nama_persyaratan = $request->nama_persyaratan;
+
+        $persyaratanpaket = PersyaratanPaket::find($id);
+        $persyaratanpaket->id_paket = $id_paket;
+        $persyaratanpaket->nama_persyaratan = $nama_persyaratan;
+        $persyaratanpaket->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Persyaratan Paket berhasil di update'
+       ]);
+       
+    }
+
+    public function deletePersyaratanPaket($id)
+    {
+        $persyaratanpaket=  PersyaratanPaket::find($id);
+        $persyaratanpaket->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Persyaratan Paket berhasil di hapus'
+       ]);
+    }
+
+    
+
+
+
+
+
     /**
      * Remove the specified resource from storage.
      *

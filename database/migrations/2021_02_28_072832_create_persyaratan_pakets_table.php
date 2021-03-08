@@ -14,7 +14,7 @@ class CreatePersyaratanPaketsTable extends Migration
     public function up()
     {
         Schema::create('persyaratan_pakets', function (Blueprint $table) {
-            $table->integer('id_persyaratan')->primary();
+            $table->integer('id_persyaratan',true);
             $table->integer('id_paket')->index('id_paket');
             $table->string('nama_persyaratan', 300);
         });

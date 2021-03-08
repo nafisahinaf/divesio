@@ -3,88 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\BerkasPendaftaran;
 use Validator;
 use Auth;
 
 class UserController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $artikel = Artikel::all();
-        return view ('artikel',['artikel' => $artikel]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
+{ 
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -119,5 +43,53 @@ class UserController extends Controller
                 ], 401);
             }
         }
+    }
+
+    public function createBerkasPendaftaran(request $request)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $diveCenter = DiveCenter::where('id_user',$id)->first();
+        
+        $berkaspendaftaran= new BerkasPendaftaran;
+        $berkaspendaftaran->id_dive_center = $request->id_dive_center;
+        $berkaspendaftaran->nama_berkas = $request->nama_berkas;
+        $berkaspendaftaran->file_berkas = $request->file_berkas;
+        $berkaspendaftaran->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berkas Pendaftaran berhasil dibuat'
+       ]);
+        // dd($auth);
+    }
+    
+    public function updateBerkasPendaftaran(Request $request, $id)
+    {
+        $nama_berkas = $request->nama_berkas;
+        $file_berkas = $request->file_berkas;
+
+        $berkaspendaftaran = BerkasPendaftaran::find($id);
+        $berkaspendaftaran->nama_berkas = $nama_berkas;
+        $berkaspendaftaran->file_berkas = $file_berkas;
+        $berkaspendaftaran->save();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berkas pendaftaran berhasil di update'
+       ]);
+       
+    }
+
+    public function deleteBerkasPendaftaran($id)
+    {
+        $berkaspendaftaran=  BerkasPendaftaran::find($id);
+        $berkaspendaftaran->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Artikel berhasil di hapus'
+       ]);
     }
 }

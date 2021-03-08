@@ -14,7 +14,7 @@ class CreateJadwalPaketsTable extends Migration
     public function up()
     {
         Schema::create('jadwal_pakets', function (Blueprint $table) {
-            $table->integer('id_jadwal')->primary();
+            $table->integer('id_jadwal',true);
             $table->integer('id_paket')->index('id_paket');
             $table->date('tanggal');
             $table->time('jam_berangkat', 6);

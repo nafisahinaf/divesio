@@ -14,7 +14,7 @@ class CreateArtikelsTable extends Migration
     public function up()
     {
         Schema::create('artikels', function (Blueprint $table) {
-            $table->integer('id_artikel')->primary();
+            $table->integer('id_artikel',true);
             $table->string('judul', 300);
             $table->string('penulis', 300);;
             $table->enum('kategori', ['umum', 'inspirasi']);
