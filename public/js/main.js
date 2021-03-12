@@ -16,16 +16,16 @@ $(document).ready(function(){
   $(".default-header").sticky({topSpacing:0});
 
 
-     if(document.getElementById("default-select")){
-          $('select').niceSelect();
-    };
+  //    if(document.getElementById("default-select")){
+  //         $('select').niceSelect();
+  //   };
 
-    $('.img-pop-up').magnificPopup({
-        type: 'image',
-        gallery:{
-        enabled:true
-        }
-    });
+  //   $('.img-pop-up').magnificPopup({
+  //       type: 'image',
+  //       gallery:{
+  //       enabled:true
+  //       }
+  //   });
 
   // $('.navbar-nav>li>a').on('click', function(){
   //     $('.navbar-collapse').collapse('hide');
@@ -34,73 +34,73 @@ $(document).ready(function(){
 
     //  Counter Js 
 
-    $('.counter').counterUp({
-        delay: 10,
-        time: 1000
-    });
+    // $('.counter').counterUp({
+    //     delay: 10,
+    //     time: 1000
+    // });
 
-    $('.play-btn').magnificPopup({
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false
-    });
+//     $('.play-btn').magnificPopup({
+//         type: 'iframe',
+//         mainClass: 'mfp-fade',
+//         removalDelay: 160,
+//         preloader: false,
+//         fixedContentPos: false
+//     });
 
-    $('.active-works-carousel').owlCarousel({
-        items:1,
-        loop:true,
-        margin: 100,
-        dots: true,
-        autoplay:true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1,
-            },
-            768: {
-                items: 1,
-            }
-        }
-    });
+//     $('.active-works-carousel').owlCarousel({
+//         items:1,
+//         loop:true,
+//         margin: 100,
+//         dots: true,
+//         autoplay:true,
+//         responsive: {
+//             0: {
+//                 items: 1
+//             },
+//             480: {
+//                 items: 1,
+//             },
+//             768: {
+//                 items: 1,
+//             }
+//         }
+//     });
 
-    $('.active-gallery').owlCarousel({
-        items:1,
-        loop:true,
-        dots: true,
-        autoplay:true,
-        nav:true,
-        navText: ["<span class='lnr lnr-arrow-up'></span>",
-        "<span class='lnr lnr-arrow-down'></span>"],        
-            responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1,
-            },
-            768: {
-                items: 2,
-            },
-            900: {
-                items: 6,
-            }
+//     $('.active-gallery').owlCarousel({
+//         items:1,
+//         loop:true,
+//         dots: true,
+//         autoplay:true,
+//         nav:true,
+//         navText: ["<span class='lnr lnr-arrow-up'></span>",
+//         "<span class='lnr lnr-arrow-down'></span>"],        
+//             responsive: {
+//             0: {
+//                 items: 1
+//             },
+//             480: {
+//                 items: 1,
+//             },
+//             768: {
+//                 items: 2,
+//             },
+//             900: {
+//                 items: 6,
+//             }
 
-        }
-    });
+//         }
+//     });
 
 
-$('.active-blog-slider').owlCarousel({
-        loop: true,
-        dots: true,
-        items: 1,
-        autoplay: true,
-        autoplayTimeout: 2000,
-        smartSpeed: 1000,
-        animateOut: 'fadeOut',
-      })
+// $('.active-blog-slider').owlCarousel({
+//         loop: true,
+//         dots: true,
+//         items: 1,
+//         autoplay: true,
+//         autoplayTimeout: 2000,
+//         smartSpeed: 1000,
+//         animateOut: 'fadeOut',
+//       })
 
 
     // Select all links with hashes

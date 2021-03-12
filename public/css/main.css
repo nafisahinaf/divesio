@@ -1,4 +1,14 @@
-    /*--------------------------- Color variations ----------------------*/
+@font-face {
+	font-family: 'Linearicons-Free';
+	src:url('../fonts/Linearicons-Free.eot?w118d');
+	src:url('../fonts/Linearicons-Free.eot?#iefixw118d') format('embedded-opentype'),
+		url('../fonts/Linearicons-Free.woff2?w118d') format('woff2'),
+		url('../fonts/Linearicons-Free.woff?w118d') format('woff'),
+		url('../fonts/Linearicons-Free.ttf?w118d') format('truetype'),
+		url('../fonts/Linearicons-Free.svg?w118d#Linearicons-Free') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}    /*--------------------------- Color variations ----------------------*/
     /* Medium Layout: 1280px */
     /* Tablet Layout: 768px */
     /* Mobile Layout: 320px */
@@ -6,6 +16,71 @@
     /* =================================== */
     /*  Basic Style 
 /* =================================== */
+
+/* Start login form */
+
+.lnr-menu:before {
+	content: "\e871";
+}
+
+.lnr-arrow-right:before {
+	content: "\e87a";
+}
+
+.lnr {
+	font-family: 'Linearicons-Free';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+    .login-wrapper, .register-wrapper {
+        margin: 0 8rem;
+        padding: 10rem 10rem;
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: .5rem;
+        box-shadow: 1px 2px 5px rgb(0 0 0 / 10%);
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    /* End login form */
     
     .pembatas {
         background: linear-gradient(85.42deg, #132B4F 5.02%, #0080C6 96.32%);
@@ -22,7 +97,7 @@
         font-style: normal;
         font-weight: light;
         color: #fff;
-        font-size: 19px;
+        font-size: 16px;
         line-height: 30px;
         text-align: justify;
     }
@@ -266,9 +341,8 @@
     .product-card {
         width: 270px;
         height: 360px;
-        position: relative;
         box-shadow: 4.38095px 4.38095px 8.7619px rgba(0, 0, 0, 0.1);
-        margin: 30px auto;
+        margin: 30px 10px;
         background: #fff;
         border-radius: 10px;
         transition: 0.3s;
@@ -476,8 +550,18 @@
         text-decoration: none;
         transition: 0.3s;
     }
+
+    .divecenter-card {
+        width: 270px;
+        height: 225px;
+        box-shadow: 4.38095px 4.38095px 8.7619px rgba(0, 0, 0, 0.1);
+        margin: 30px auto;
+        background: #fff;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
     
-    .card-divecenter-img-top {
+    .card-divecenter-img {
         height: 80%;
         object-fit: cover;
         border-top-left-radius: 10px;
@@ -2435,58 +2519,6 @@
         border: none;
     }
     
-    .default-select {
-        height: 40px;
-    }
-    
-    .default-select .nice-select {
-        border: none;
-        border-radius: 0px;
-        height: 40px;
-        background: #f9f9ff;
-        padding-left: 20px;
-        padding-right: 40px;
-    }
-    
-    .default-select .nice-select .list {
-        margin-top: 0;
-        border: none;
-        border-radius: 0px;
-        box-shadow: none;
-        width: 100%;
-        padding: 10px 0 10px 0px;
-    }
-    
-    .default-select .nice-select .list .option {
-        font-weight: 300;
-        -webkit-transition: all 0.3s ease 0s;
-        -moz-transition: all 0.3s ease 0s;
-        -o-transition: all 0.3s ease 0s;
-        transition: all 0.3s ease 0s;
-        line-height: 28px;
-        min-height: 28px;
-        font-size: 12px;
-        padding-left: 20px;
-    }
-    
-    .default-select .nice-select .list .option.selected {
-        color: #b01afe;
-        background: transparent;
-    }
-    
-    .default-select .nice-select .list .option:hover {
-        color: #b01afe;
-        background: transparent;
-    }
-    
-    .default-select .current {
-        margin-right: 50px;
-        font-weight: 300;
-    }
-    
-    .default-select .nice-select::after {
-        right: 20px;
-    }
     
     .form-select {
         height: 40px;
@@ -2578,11 +2610,6 @@
         }
     }
     
-    .navbar-light .navbar-toggler {
-        color: rgba(255, 255, 255, 0.5);
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-    
     .navbar-nav a {
         text-transform: uppercase;
         font-weight: 600;
@@ -2603,30 +2630,7 @@
     }
     
     .section-gap {
-        padding: 120px 0;
-    }
-    
-    .section-gap-artikel {
         padding: 80px 0 60px 0;
-    }
-    
-    .section-title {
-        padding-bottom: 30px;
-    }
-    
-    .section-title h2 {
-        margin-bottom: 20px;
-    }
-    
-    .section-title p {
-        font-size: 16px;
-        margin-bottom: 0;
-    }
-    
-    @media (max-width: 991px) {
-        .section-title p br {
-            display: none;
-        }
     }
     
     .p1-gradient-bg,
@@ -2753,6 +2757,8 @@
     .default-header {
         background-color: transparent;
         width: 100% !important;
+        background: linear-gradient(85.42deg, #132B4F 5.02%, #0080C6 96.32%);
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
     }
     
     @media (max-width: 992px) {
@@ -2765,14 +2771,14 @@
         height: 48px !important;
     }
     
-    .is-sticky .default-header {
+    /* .is-sticky .default-header {
         -webkit-transition: all 0.3s ease 0s;
         -moz-transition: all 0.3s ease 0s;
         -o-transition: all 0.3s ease 0s;
         transition: all 0.3s ease 0s;
         background: linear-gradient(85.42deg, #132B4F 5.02%, #0080C6 96.32%);
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-    }
+    } */
     
     .dropdown-item {
         font-size: 14px;
@@ -3486,3 +3492,4 @@
     .switch-wrap p {
         margin: 0;
     }
+    

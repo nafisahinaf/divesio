@@ -19,7 +19,7 @@ class DiveCenterController extends Controller
         // $paketselam = DB::table('paketselam')->get();
         // dd($paketselam);
         $paketselam = Paketselam::all();
-        return view ('divecenter',['paketselam' => $paketselam]);
+        return view ('pages/divecenter',['paketselam' => $paketselam]);
         // return Paketselam::all();
     }
 
