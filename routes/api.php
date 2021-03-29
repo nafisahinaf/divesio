@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::get('/get-all-berkas-pendaftaran',[AdminController::class,'getAllBerkasPendaftaran']);
     });   
    
-    Route::group(['middleware' => ['pemesan',],'prefix' => 'pemesan'], function($router) {
+    Route::group(['middleware' => ['pemesan'],'prefix' => 'pemesan'], function($router) {
         Route::get('/list-top-artikel',[UserController::class,'listTopArtikel']);
         Route::get('/list-top-dive-center',[UserController::class,'listTopDiveCenter']);
         Route::post('/create-berkas-pendaftaran',[UserController::class,'createBerkasPendaftaran']);
@@ -60,10 +60,6 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::delete('/delete-berkas-pendaftaran/{id}',[UserController::class,'deleteBerkasPendaftaran']);
         Route::post('/create-order',[UserController::class,'createOrder']);
     });  
-   
-    
-
-    
 });
 
 Route::group([
@@ -78,3 +74,8 @@ Route::group([
         Route::get('user', [AuthController::class,'user']);
     });
 });
+
+// Route::get('/divesites',[DiveCenterController::class,'index']);
+// Route::post('/divesites',[DiveCenterController::class,'create']);
+// Route::put('/divesites/{$id}',[DiveCenterController::class,'update']);
+// Route::delete('/divesites/{$id}',[DiveCenterController::class,'delete']);

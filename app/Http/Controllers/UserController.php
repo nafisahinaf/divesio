@@ -218,23 +218,72 @@ class UserController extends Controller
         ]);
     }
 
-    //get 8 artikel teratas blm
+    //get 8 divecenter teratas
     public function listTopDiveCenter(){
         $auth = Auth::user();
         $id = $auth->id_user;
 
-        $listDiveCenter = DiveCenter::with('user')
-                        ->whereHas('user', function($q) use($id) {
-                            $q->where('id_user', '=', $id); 
-                        })
-                        // ->where('id_role',3)
-                        ->paginate(8);
-
+        // $listDiveCenter = DiveCenter::with('user')
+        //                 ->whereHas('user', function($q) use($id) {
+        //                     $q->where('id_user', '=', $id); 
+        //                 })
+        //                 // ->where('id_role',3)
+        //                 ->paginate(8);
+        
+        $listDiveCenter = DiveCenter::all()
+                        ->paginate(8)
+                        ->get();
+                        
         // dd($listArtikel);
                         return response()->json([
             'status' => 'Success',
             'data' => [
                 'list_dive_center' => $listDiveCenter
+            ],
+        ]);
+    }
+
+    //get 8 paketselam teratas
+    public function listTopPaketSelam(){
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        // $listDiveCenter = DiveCenter::with('user')
+        //                 ->whereHas('user', function($q) use($id) {
+        //                     $q->where('id_user', '=', $id); 
+        //                 })
+        //                 // ->where('id_role',3)
+        //                 ->paginate(8);
+        
+        $listPaketSelam = PaketSelam::all()
+                        // ->select('')
+                        ->limit(8)
+                        ->get();
+        // dd($listArtikel);
+                        return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'list_paket_selam' => $listPaketSelam
+            ],
+        ]);
+    }
+
+    //get detail divecenter
+    public function detailDiveCenter($id_dive_center){
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $detaildivecenter = DiveCenter::with('user')
+                        ->whereHas('user', function($q) use($id) {
+                            $q->where('id_user', '=', $id); 
+                        })
+                        // ->where('id_role',3)
+                        ->paginate(8);
+        
+                        return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'detail_dive_center' => $detaildivecenter
             ],
         ]);
     }

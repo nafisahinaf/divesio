@@ -63,11 +63,11 @@ class LoginController extends Controller
             if($user->id_role == 1){
                 $request->session()->put('id_role',$user->id_role );
                 $request->session()->put('name','SuperAdmin' );
-                return redirect()->route('home');
+                return redirect()->route('register');
             }else if($user->id_role == 2){
                 $request->session()->put('name',$user->name);
                 $request->session()->put('id_role',$user->id_role );
-                return redirect()->route('home');
+                return redirect()->route('register');
             }else if($user->id_role == 5){
                 $request->session()->put('name',$user->name);
                 $request->session()->put('id_role',$user->id_role );
@@ -75,7 +75,7 @@ class LoginController extends Controller
             } else if ($user->id_role == 4) {
                 $request->session()->put('name',$user->name);
                 $request->session()->put('id_role',$user->id_role );
-                return redirect()->route('home');
+                return redirect()->route('register');
             }
         } else {
             // Session::flash('errors', 'Email atau password salah');

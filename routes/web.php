@@ -19,7 +19,8 @@ Route::get('/detaildivecenter', [PageController::class,'detaildivecenter']);
 Route::get('/detailpaket', [PageController::class,'detailpaket']);
 Route::get('/about', [PageController::class,'about']);
 Route::get('/artikel', [PageController::class,'artikel']);
-
+Route::get('/login', [PageController::class,'login']);
+Route::get('/register', [PageController::class,'register']);
 Route::get('/detailartikel', [PageController::class,'detailartikel']);
 
 
@@ -29,6 +30,10 @@ Route::get('/daftardivecenter',[DiveCenterController::class,'getDataDiveCenter']
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //Route cek BE
+// teshome
+
+Route::get('/hometest', [PageController::class,'hometest']);
+Route::get('/divecentertest', [DiveCenterController::class,'test']);

@@ -27,6 +27,9 @@ class DiveCenterController extends Controller
         // $paketselam = Paketselam::all();
         // return view ('divesites',['paketselam' => $paketselam]);
         return PaketSelam::all();
+        $paketselam = Paketselam::all();
+        return view ('pages/divecenter',['paketselam' => $paketselam]);
+        // return Paketselam::all();
     }
 
     public function createPaketSelam(request $request)
@@ -43,14 +46,10 @@ class DiveCenterController extends Controller
             'foto' => 'required',
             'harga' => 'required',
         ]);
-        // return $diveCenter;
-       
-        //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
-        //first untuk objek pertama bukan bentuk array
+        
         $data = $request->all();
         $data['id_dive_center']=$diveCenter->id_dive_center;
         // $paketselam->id_dive_center = $diveCenter->id_dive_center;
-
         PaketSelam::create($data);
 
         return response()->json([
