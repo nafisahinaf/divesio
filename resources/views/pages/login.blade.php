@@ -4,7 +4,7 @@
 
 @section('section')
 
-    <section class="section-gap info-area " id="artikel ">
+    <section class="section-gap info-area ">
             <div class="container d-flex text-center">
             <main class="form-signin login-wrapper">
         <form>

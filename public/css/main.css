@@ -85,7 +85,6 @@
     .pembatas {
         background: linear-gradient(85.42deg, #132B4F 5.02%, #0080C6 96.32%);
         height: 120px;
-        align-items: center;
     }
     
     .pembatas img {
@@ -103,12 +102,11 @@
     }
 
     .pembatas-font {
-        font-family: 'Roboto Condensed', sans-serif;
-        font-style: normal;
-        font-weight: light;
-        color: #fff;
+        font-family: 'Roboto Condensed', sans-serif !important;
+        font-weight: 300 !important;
+        /*  color: #fff;
         font-size: 35px;
-        line-height: 47px;
+        line-height: 47px; */
     }
 
     .pembatas-font-hitam {
@@ -123,6 +121,11 @@
         .pembatas {
             height: 90px;
         }
+
+        .pembatas-font{
+            font-size: 2em !important;
+            text-align: center;
+        }
     }
     
     .pembatas-garis {
@@ -130,6 +133,12 @@
         width: 1px;
         height: 80px;
         background-color: #fff;
+    }
+
+    @media (max-width: 800px){
+        .pembatas-garis{
+            height: 40px;
+        }
     }
     
     .warna-footer {
@@ -217,11 +226,11 @@
     }
     
     .title-biru {
-        color: #223F77;
+        color: #223F77 !important;
     }
     
     .title-biru h1 {
-        color: #223F77;
+        color: #223F77 !important;
     }
     
     .title-kuning {
@@ -339,10 +348,10 @@
     }
     
     .product-card {
-        width: 270px;
-        height: 360px;
+        /* width: 270px; */
+        /* height: 360px; */
         box-shadow: 4.38095px 4.38095px 8.7619px rgba(0, 0, 0, 0.1);
-        margin: 30px 10px;
+        /* margin: 30px 10px; */
         background: #fff;
         border-radius: 10px;
         transition: 0.3s;
@@ -378,7 +387,7 @@
         opacity: 0.8;
     }
     
-    .product-details h4 a {
+    .product-details .h4 a {
         font-style: bold;
         font-size: 17px;
         display: block;
@@ -389,7 +398,7 @@
         transition: 0.1s;
     }
     
-    .product-details h4 a:hover {
+    .product-details .h4 a:hover {
         transform: scale(1.009);
         color: #03A3CF;
     }
@@ -541,7 +550,6 @@
         display: flex;
         overflow: hidden;
         border-radius: 10px;
-        width: 275px;
         height: 225px;
         flex-direction: column;
         box-shadow: 4.38095px 4.38095px 8.7619px rgba(0, 0, 0, 0.1);
@@ -571,13 +579,13 @@
     .card-divecenter-body {
         text-align: center;
         height: 20%;
+        display: flex;
     }
     
     .card-divecenter-text {
         font-style: bold;
         font-weight: 700;
         font-size: 15px;
-        display: block;
         text-transform: uppercase;
         color: #223F77;
         text-decoration: none;
@@ -800,7 +808,6 @@
     h5,
     h6 {
         font-family: "Poppins", sans-serif;
-        color: #222222;
         line-height: 1.2em !important;
         margin-bottom: 0;
         margin-top: 0;
@@ -817,10 +824,9 @@
         margin-top: 0;
         font-family: "Poppins", sans-serif;
         font-weight: 600;
-        color: #222222;
     }
     
-    h1,
+    /* h1,
     .h1 {
         font-size: 36px;
     }
@@ -849,7 +855,7 @@
     .h6 {
         font-size: 14px;
         color: #222222;
-    }
+    } */
     
     td,
     th {
@@ -1539,7 +1545,7 @@
         outline: none;
         line-height: 40px;
         padding: 0 30px;
-        font-size: .8em;
+        font-size: .9em;
         text-align: center;
         text-decoration: none;
         font-weight: 500;
@@ -1787,7 +1793,7 @@
     .genric-btn.link {
         color: #222222;
         background: #f9f9ff;
-        text-decoration: underline;
+        text-decoration: none;
         border: 1px solid transparent;
     }
     
@@ -2793,7 +2799,7 @@
         }
     }
     
-    @media (min-width: 768px) {
+    @media (min-width: 1000px) {
         .dropdown .dropdown-menu {
             display: block;
             opacity: 0;
@@ -2812,7 +2818,6 @@
     .dropdown-menu {
         background: #fff;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        opacity: 0.1;
         border-radius: 0px 0px 5px 5px;
         margin-top: 15px;
         border: none;
@@ -2822,13 +2827,7 @@
         padding: 5px 15px;
         color: #132B4F;
     }
-    
-    @media (max-width: 767px) {
-        .dropdown-menu {
-            margin-top: 0px;
-        }
-    }
-    
+
     .dropdown-item:focus,
     .dropdown-item:hover {
         color: #fff;

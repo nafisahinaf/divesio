@@ -2,12 +2,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Paketselam;
+
 
 class PageController extends Controller
 {
+    // public function home()
+    // {
+    //     return view ('pages/home');
+    // }
+
     public function home()
     {
-        return view ('pages/home');
+        // $paketselam = DB::table('paketselam')->get();
+        // dd($paketselam);
+        $paketselam = Paketselam::all();
+        return view ('pages/home',['paketselam' => $paketselam]);
+        // return Paketselam::all();
     }
     
     public function divecenter()
@@ -17,11 +28,17 @@ class PageController extends Controller
 
     public function detaildivecenter()
     {
-        return view ('pages/detaildivecenter');
+        // $paketselam = DB::table('paketselam')->get();
+        // dd($paketselam);
+        $paketselam = Paketselam::all();
+        return view ('pages/detaildivecenter',['paketselam' => $paketselam]);
+        // return Paketselam::all();
     }
     public function detailpaket()
     {
-        return view ('pages/detailpaket');
+        // return view ('pages/detailpaket');
+        $paketselam = Paketselam::all();
+        return view ('pages/detailpaket',['paketselam' => $paketselam]);
     }
     public function about()
     {

@@ -2,288 +2,130 @@
 
 @section('title', 'Open Water Diver PADI Courses with Ecodive Bali Diving')
 
+@push('customstyle')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+@endpush
+
 @section('section')
 
     <!-- Foto area -->
     <div class="banner-fotodetailpaket"></div>
     <!-- End Foto Area -->
 
-    <!-- Dive Sites Hubungi -->
-
-    <section class="section-gap-detaildivecenter info-area " id="artikel ">
+    <!-- Detail Paket -->
+    <section class="section-gap-detaildivecenter">
         <div class="container ">
-            <div class="row d-flex justify-content-center ">
+            <div class="row">
                 <div class="col">
                     <p><a href="{{url('/detaildivecenter')}}">Dive Center Tulamben</a></p>
-                    <h2 class="title-biru">Raja Ampat Jumping Carnival</h2><br>
+                    <p class="h2 title-biru">Raja Ampat Jumping Carnival</p><br>
                     <hr>
-                    <h3 class="title-kuning">IDR 500.000</h3>
+                    <p class="h3 title-kuning">IDR 500.000</p>
                     <hr>
+                    <br>
                 </div>
             </div>
-            <div class="row d-flex justify-content-center mt-30 ">
-                <div class="col-7">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-header">
-                                    <ul class="nav nav-tabs card-header-tabs justify-content-center" id="detailpaket-list" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active warna-footer-a" href="#informasi" role="tab" aria-controls="informasi" aria-selected="true">Informasi</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link warna-footer-a" href="#jadwal" role="tab" aria-controls="jadwal" aria-selected="false">Jadwal Perjalanan</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link warna-footer-a" href="#includex" role="tab" aria-controls="includex" aria-selected="false">Include & Exclude</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link warna-footer-a" href="#syarat" role="tab" aria-controls="syarat" aria-selected="false">Syarat & Ketentuan</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-body">
-                                    <div class="tab-content mt-3">
-                                        <div class="tab-pane active" id="informasi" role="tabpanel">
-                                            <p class="card-text">Ingin berlibur ke Bali mengunjungi tempat-tempat terkenalnya? Bareng Divesio kamu akan diajak tur untuk menikmati matahari terbenam, makan malam romantis di Jimbaran, dan menjelajahi Nusa Penida! Dijamin
-                                                terpikat, deh.</p>
-                                                <p><strong>Catatan :</strong></p>
-                                                <div class="row">
-                                                    <div class="col-sm-auto">
-                                                    •
-                                                    </div>
-                                                    <div class="col">
-                                                    Biaya dan jadwal tur dapat berubah sewaktu–waktu sesuai kondisi tempat wisata yang dikunjungi
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-auto">
-                                                    •
-                                                    </div>
-                                                    <div class="col">
-                                                    Harga tidak berlaku untuk periode high season (Lebaran, Natal & Tahun Baru, Imlek, Hari Nyepi)
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="tab-pane" id="jadwal" role="tabpanel" aria-labelledby="history-tab">
-                                            <h5 card-text title-biru>Open Water Dive PADI - Hari 1</h5><br>
-                                            <p>
-                                                - Peserta dijemput oleh tim kami di Bandara Lombok/Pelabuhan Lembar/hotel
-                                                <br>-  Perjalanan menuju Pelabuhan Tanjung Luar
-                                                <br>-  Tiba di Pulau Kambing. Menuju Pantai Pink
-                                                <br>-  Tur mengunjungi: Pantai Pink
-                                                <br>-  Makan siang di restoran setempat
-                                                <br>-  Tur mengunjungi: Pulau Tiga dan Pulau Pasir
-                                                <br>-  Penyeberangan kembali ke Pelabuhan Tanjung Luar
-                                                <br>-  Pengantaran peserta kembali ke tempat penjemputan awal
-                                            </p>  
-                                        </div>
+            <div class="row">
+                <!-- Tab deskripsi -->
+                <div class="col-lg-7 col-sm-6">
+                    <div class="card card-primary card-outline card-outline-tabs">
+                        <div class="card-header pt-2 border-bottom-0">
+                            <ul class="nav nav-tabs d-flex justify-content-center" id="custom-tabs-five-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link warna-footer-a active" id="custom-tabs-five-informasi-tab" data-toggle="pill" href="#custom-tabs-five-informasi" role="tab" aria-controls="custom-tabs-five-informasi" aria-selected="true">Informasi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link warna-footer-a" id="custom-tabs-five-agenda-tab" data-toggle="pill" href="#custom-tabs-five-agenda" role="tab" aria-controls="custom-tabs-five-agenda" aria-selected="false">Agenda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link warna-footer-a" id="custom-tabs-five-include-tab" data-toggle="pill" href="#custom-tabs-five-include" role="tab" aria-controls="custom-tabs-five-include" aria-selected="false">Include</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link warna-footer-a" id="custom-tabs-five-exclude-tab" data-toggle="pill" href="#custom-tabs-five-exclude" role="tab" aria-controls="custom-tabs-five-exclude" aria-selected="false">Exclude</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link warna-footer-a" id="custom-tabs-five-syarat-tab" data-toggle="pill" href="#custom-tabs-five-syarat" role="tab" aria-controls="custom-tabs-five-syarat" aria-selected="false">Syarat & Ketentuan</a>
+                            </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-five-tabContent">
+                            <div class="tab-pane fade active show text-justify" id="custom-tabs-five-informasi" role="tabpanel" aria-labelledby="custom-tabs-five-informasi-tab">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
+                            </div>
+                            <div class="tab-pane fade text-justify" id="custom-tabs-five-agenda" role="tabpanel" aria-labelledby="custom-tabs-five-agenda-tab">
+                                Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                            </div>
+                            <div class="tab-pane fade text-justify" id="custom-tabs-five-include" role="tabpanel" aria-labelledby="custom-tabs-five-include-tab">
+                                Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                            </div>
+                            <div class="tab-pane fade text-justify" id="custom-tabs-five-exclude" role="tabpanel" aria-labelledby="custom-tabs-five-exclude-tab">
+                                Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                            </div>
+                            <div class="tab-pane fade text-justify" id="custom-tabs-five-syarat" role="tabpanel" aria-labelledby="custom-tabs-five-syarat-tab">
+                                Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                            </div>
+                            </div>
+                        </div>
+                    <!-- /.card -->
+                    </div>
+                </div>
+                <!-- end tab -->
 
-                                        <div class="tab-pane" id="includex" role="tabpanel" aria-labelledby="deals-tab">
-                                            <p class="card-text">
-                                            Tiket pesawat menuju Lombok
-                                            <br>Akomodasi hotel di Lombok
-                                            <br>Keperluan pribadi
-                                            <br>Tambahan makanan dan minuman di luar program
-                                            <br>Tip untuk sopir.
-                                            </p>
-                                        </div>
-
-                                        <div class="tab-pane" id="syarat" role="tabpanel" aria-labelledby="syarat-tab">
-                                            <ul>
-                                                <li>Pendaftaran dan pemesanan dapat dilakukan paling lambat 7 hari sebelum keberangkatan (tergantung pada destinasi perjalanan paket tur) dengan pembayaran penuh (lunas)</li>
-                                                <li>Jadwal tur dapat berubah sewaktu-waktu mengikuti kondisi yang memungkinkan tanpa mengurangi isi dalam acara tur tersebut</li>
-                                                <li>Divesio berhak menagih selisih harga tur dan lain-lainnya (jika terjadi kenaikan harga tur, pajak bandara, dll) kepada calon peserta.</li>
-                                                <li>Memiliki lisensi A</li>
-                                                <li>Tidak memiliki riwayat penyakit</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                <!-- Pilih jumlah paket -->
+                <div class="col-lg-5 col-sm-6">
+                    <div class="col-lg-10 ml-auto"> 
+                        <div class="mb-4">  
+                            <p class="h6 title-biru">Jumlah Paket</p>
+                            <div class="border mt-3 p-3">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <button type="button" class="btn btn-danger btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                            <span class="fas fa-minus"></span>
+                                        </button>
+                                    </span>     
+                                    <input type="text" name="quant[1]" class="form-control text-center input-number" value="1" min="1" max="10">
+                                    <span class="input-group-append">
+                                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[1]">
+                                            <span class="fas fa-plus"></span>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
+                        <div class="mb-4">  
+                            <p class="h6 title-biru">Rincian Pemesanan</p>
+                            <table class="table table-borderless mt-3 pd-3 border">  
+                                    <tbody>
+                                        <tr>
+                                            <td>Tanggal Pesanan</th>
+                                            <th class="mr-auto">20 Juli 2021</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Paket</th>
+                                            <th>2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Biaya</th>
+                                            <th>Rp2.000.000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div> 
                     </div>
                 </div>
-                <div class="col-5">
-
-                </div>
+                <!-- end pilih paket -->
             </div>
-        </div>
+
         </div>
     </section>
     <!-- End about Area -->
 
-    <!-- Pembatas -->
-    <div class="pembatas">
-        <div class="container w-100 h-100">
-            <div class="row align-items-center justify-content-center h-100">
-                <div class="col-md-auto">
-                <img src="{{asset('img/DIVESIO (1) - putih.png')}}" width="95px" alt="logo-divesio">
-                </div>
-                <div class="col-md-auto">
-                    <div class="pembatas-garis"></div>
-                </div>
-                <div class="col-md-auto pembatas-font">
-                    Paket Lain Untuk Anda
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Pembatas -->
-
-    <!-- Paket untuk anda -->
-
-    <section class="section-gap info-area " id="artikel ">
-        <div class="container ">
-            <div class="row d-flex justify-content-center ">
-                <div class="row ">
-                    <div class="inspirasi-list ">
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card ">
-                            <div class="product-tumb ">
-                                <img src="https://i1.wp.com/rajaampatbiodiversity.com/wp-content/uploads/2017/12/raja-ampat-diving.jpg?fit=1024%2C658&ssl=1 " alt=" ">
-                            </div>
-                            <div class="product-details ">
-                                <h4><a href="# ">Raja Ampat Jumping Carnival</a></h4>
-                                <span class="product-catagory ">Open Diving</span>
-                                <div class="product-bottom-details ">
-                                    <div class="product-price "><small>Mulai dari</small> IDR 650.000</div>
-                                    <div class="product-links ">
-                                        <a href=" "><i class="fa fa-heart "></i></a>
-                                        <a href=" "><i class="fa fa-shopping-cart "></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="page">
-                    <ul>
-                        <li class="no"><a href="#">«</a></li>
-                        <li class="pg active"><a href="#">1</a></li>
-                        <li class="pg"><a href="#">2</a></li>
-                        <li class="pg"><a href="#">3</a></li>
-                        <li class="pg"><a href="#">4</a></li>
-                        <li class="pg"><a href="#">5</a></li>
-                        <li class="no"><a href="#">»</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Paket-->
-
 @endsection
+
+@push('customscript')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+@endpush

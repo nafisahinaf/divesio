@@ -11,7 +11,7 @@
                 <div class="row justify-content-center align-items-center" style="height: 450px;">
                     <div class="col-md-10 col-12 ">
                         <div class="banner-content text-center ">
-                            <h1 class="text-uppercase text-white ">About</h1>
+                            <h1 class="text-uppercase text-white ">DIVESIO</h1>
                         </div>
                     </div>
                 </div>
@@ -20,17 +20,25 @@
     </section>
 
     <!-- Dive Sites Hubungi -->
-
-    <section class="section-gap info-area " id="artikel ">
+    <section class="section-gap">
             <div class="container ">
-                <div class="d-flex justify-content-center">
-                    <img src="{{asset('img/DIVESIO - about.png')}}" width="40%" alt="logo-divesio">
+                <div class="row my-5">
+                    <div class="col-6">
+                        <img width="100%" src="https://images.unsplash.com/flagged/photo-1560502484-1180cacca327?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80" alt="" class="src">
+                    </div>
+                    <div class="col-6">
+                        <img width="100%" src="https://images.unsplash.com/flagged/photo-1560502484-1180cacca327?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80" alt="" class="src">
+                    </div>
                 </div>
-                <div class="mt-30"></div>
-                <div class=" pembatas-font-hitam title-biru text-center">
-                    A BAD DAY DIVING IS BETTER THAN A GOOD DAY AT WORK
+                <div class="row">
+                    <div class="col-6 d-flex justify-content-center align-items-center h-100 mb-50">
+                        <img src="{{asset('img/DIVESIO - about.png')}}" width="70%" alt="logo-divesio">
+                    </div>
+                    <div class="col-6 d-flex justify-content-center align-items-center h-100">
+                        <p class="h1 text-center">A BAD DAY DIVING IS BETTER THAN A GOOD DAY AT WORK</p>
+                    </div>
                 </div>
-                <div class="text-about mt-30 mb-30 title-biru">
+                <p class="mt-30 text-justify mt-30 mb-30 title-biru">
                     Divesio adalah sebuah platform yang terdiri dari pusat selam yang sudah terverifikasi wisata berkelanjutan. Divesio memudahkan Anda untuk mendapatkan informasi pusat selam dan paket selam yang tersedia.
                     Divesio juga mempermudah Anda dalam melakukan pemesanan paket selam yang Anda inginkan.<br><br>
 
@@ -41,14 +49,14 @@
                     <br><br>
 
                     Untuk informasi lebih lanjut dan kerja sama, hubungi kami di:
-                    <br>
+                    <br><br><br>
 
                     <strong>Divesio,<br>
                     Karanggayam, DI Yogyakarta,<br>
                     Indonesia, 80852<br>
                     email: admin@divesio.com<br>
                     Tel/Fax. (62) 363 – 23482</strong>
-                </div>
+                    </p>
             </div>
             </div>
         </section>

@@ -22,7 +22,7 @@
 
     <!-- Paket untuk anda -->
 
-    <section class="section-gap info-area " id="artikel ">
+    <section class="section-gap info-area ">
         <div class="container ">
             <div class="row d-flex justify-content-center ">
                 <div class="menu-content">
