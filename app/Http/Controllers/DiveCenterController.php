@@ -9,7 +9,9 @@ use App\Models\DiveCenter;
 use App\Models\JadwalPaket;
 use App\Models\persyaratanPaket;
 use App\Models\FasilitasPaket;
+use App\Models\User;
 use Auth; 
+use Validator; 
 
 class DiveCenterController extends Controller
 {
@@ -31,34 +33,61 @@ class DiveCenterController extends Controller
     {
         $auth = Auth::user();
         $id = $auth->id_user;
+        $diveCenter = DiveCenter::where('id_user',$id)->first(); 
 
-        $diveCenter = DiveCenter::where('id_user',$id)->first();
+        $validator = Validator::make($request->all(),[
+            'nama_paket' => 'required',
+            'deskripsi' => 'required',
+            'ketersediaan' => 'required',
+            'kuota_peserta' => 'required',
+            'foto' => 'required',
+            'harga' => 'required',
+        ]);
+        // return $diveCenter;
+       
         //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
         //first untuk objek pertama bukan bentuk array
-        
+        $data = $request->all();
+        $data['id_dive_center']=$diveCenter->id_dive_center;
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
 
-        // return $diveCenter;
-        
-        $paketselam= new PaketSelam;
-        $paketselam->id_dive_center = $diveCenter->id_dive_center;
-        $paketselam->nama_paket = $request->nama_paket;
-        $paketselam->deskripsi = $request->deskripsi;
-        $paketselam->ketersediaan = $request->ketersediaan;
-        $paketselam->kuota_peserta = $request->kuota_peserta;
-        $paketselam->foto = $request->foto;
-        $paketselam->harga = $request->harga;
-        $paketselam->save();
+        PaketSelam::create($data);
 
         return response()->json([
             'status' => 'Success',
             'message' => 'Paket selam berhasil dibuat'
        ]);
     }
+    public function createJadwalPaket(request $request)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        $diveCenter = DiveCenter::where('id_user',$id)->first();
+        //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
+        //first untuk objek pertama bukan bentuk array
+        
+        $validator = Validator::make($request->all(),[
+            'id_paket' => 'required',
+            'tanggal' => 'required',
+            'jam_berangkat' => 'required',
+            'durasi' => 'required',
+        ]);
+        // return $diveCenter;
+        
+        $data = $request->all();
+        $data['id_dive_center']=$diveCenter;
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+
+        jadwalPaket::create($data);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Jadwal Paket berhasil dibuat'
+       ]);
+    }
     
     public function editPaketSelam(Request $request, $id)
-    {
-       
-
+    {  
         $nama_paket = $request->nama_paket;
         $deskripsi = $request->deskripsi;
         $ketersediaan = $request->ketersediaan;
@@ -97,11 +126,11 @@ class DiveCenterController extends Controller
         $auth = Auth::user();
         $id = $auth->id_user;
 
-        $listJadwalPaket = PaketSelam::with('jadwal_paket','divecenter')
+        $listJadwalPaket = PaketSelam::with('jadwal_pakets','dive_center')
                         ->whereHas('dive_center', function($q) use($id) {
                             $q->where('id_user', '=', $id); 
                         })
-                        // ->where('id_status',8)
+                        // ->where('id_role',2)
                         ->paginate(3);
 
         return response()->json([
@@ -120,30 +149,7 @@ class DiveCenterController extends Controller
         return JadwalPaket::all();
     }
 
-    public function createJadwalPaket(request $request)
-    {
-        $auth = Auth::user();
-        $id = $auth->id_user;
-
-        $diveCenter = DiveCenter::where('id_user',$id)->first();
-        //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
-        //first untuk objek pertama bukan bentuk array
-        
-
-        // return $diveCenter;
-        
-        $jadwalpaket= new JadwalPaket;
-        $jadwalpaket->id_paket = $request->id_paket;
-        $jadwalpaket->tanggal = $request->tanggal;
-        $jadwalpaket->jam_berangkat = $request->jam_berangkat;
-        $jadwalpaket->durasi = $request->durasi;
-        $jadwalpaket->save();
-
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Jadwal Paket berhasil dibuat'
-       ]);
-    }
+    
     
     public function updateJadwalPaket(Request $request, $id)
     {
@@ -180,7 +186,7 @@ class DiveCenterController extends Controller
     //get persyaratan paket tertentu
     public function getPersyaratanPaket($id_paket)
     {
-        $persyaratanpaket = PersyaratanPaket::with('paketselam')
+        $persyaratanpaket = PersyaratanPaket::with('paket_selam')
                          ->where('id_paket',$id_paket)
                         //  ->where('id_status',7)
                          ->get();
@@ -202,15 +208,18 @@ class DiveCenterController extends Controller
         $diveCenter = DiveCenter::where('id_user',$id)->first();
         //where yg mana tabel divecenter kolom id_user sama dg id_user user yg sdg login
         //first untuk objek pertama bukan bentuk array
-        
 
-        // return $diveCenter;
-        
-        $persyaratanpaket= new PersyaratanPaket;
-        $persyaratanpaket->id_paket = $request->id_paket;
-        $persyaratanpaket->nama_persyaratan = $request->nama_persyaratan;
-        $persyaratanpaket->save();
 
+        $validator = Validator::make($request->all(),[
+        'id_paket' =>'required',
+        'nama_persyaratan' =>'required',
+        ]);
+
+        $data = $request->all();
+        $data['id_dive_center']=$diveCenter;
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+
+        PersyaratanPaket::create($data);
         return response()->json([
             'status' => 'Success',
             'message' => 'Persyaratan Paket berhasil dibuat'

@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PersyaratanPaket extends Model
 {
-	protected $table = 'persyaratan_paket';
+	protected $table = 'persyaratan_pakets';
 	protected $primaryKey = 'id_persyaratan';
 	public $incrementing = false;
 	public $timestamps = false;

@@ -52,6 +52,11 @@ class PaketSelam extends Model
 		'harga'
 	];
 
+	public function dive_center()
+	{
+		return $this->belongsTo(DiveCenter::class, 'id_dive_center');
+	}
+
 	public function fasilitas_paket_selams()
 	{
 		return $this->hasMany(FasilitasPaketSelam::class, 'id_paket_selam');

@@ -63,5 +63,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'csrf' => \Http\Middleware\VerifyCsrfToken::class,
+        'pemesan' => \App\Http\Middleware\User::class,
+        'divecenter' => \App\Http\Middleware\DiveCenter::class,
+        'admin' => \App\Http\Middleware\Admin::class,
     ];
 }

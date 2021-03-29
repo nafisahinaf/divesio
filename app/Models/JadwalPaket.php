@@ -52,3 +52,4 @@ class JadwalPaket extends Model
 		return $this->belongsTo(PaketSelam::class, 'id_paket');
 	}
 }
+

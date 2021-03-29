@@ -42,7 +42,7 @@ class DiveCenter extends Model
 	];
 
 	protected $fillable = [
-		'id_user',
+		// 'id_user',
 		'nama',
 		'lokasi',
 		'about',
@@ -65,6 +65,11 @@ class DiveCenter extends Model
 	public function fasilitas_divecenters()
 	{
 		return $this->hasMany(FasilitasDivecenter::class, 'id_dive_center');
+	}
+
+	public function paket_selams()
+	{
+		return $this->hasMany(PaketSelam::class, 'id_dive_center');
 	}
 	
 	public function berkas_pendaftarans()

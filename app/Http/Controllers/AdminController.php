@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Paketselam;
 use App\Models\DiveCenter;
 use App\Models\Artikel;
+use App\Models\User;
 use App\Models\BerkasPendaftaran;
+use Validator;
 use Auth; 
 
 class AdminController extends Controller
@@ -30,16 +32,24 @@ class AdminController extends Controller
     {
         $auth = Auth::user();
         $id = $auth->id_user;
-        
-        $divecenter= new DiveCenter;
-        $divecenter->id_user = $id;
-        $divecenter->nama = $request->nama;
-        $divecenter->lokasi = $request->lokasi;
-        $divecenter->about = $request->about;
-        $divecenter->no_hp = $request->no_hp;
-        $divecenter->email = $request->email;
-        $divecenter->foto_dive_center = $request->foto_dive_center;
-        $divecenter->save();
+
+        // $user = User::where('id_user',$id)->first();
+
+        $validator = Validator::make($request->all(),[
+        'id_user' =>'required',
+        'nama' => 'required',
+        'lokasi' => 'required',
+        'about'  => 'required',
+        'no_hp'  => 'required',
+        'email' => 'required',
+        'foto_dive_center'  => 'required',
+        ]);
+
+        // $data['id_user']=$user;
+        $data = $request->all();
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+
+        DiveCenter::create($data);
 
         return response()->json([
             'status' => 'Success',
@@ -72,6 +82,9 @@ class AdminController extends Controller
        ]);
        
     }
+
+    //func edit role  user
+    
 
     public function deleteDiveCenter($id)
     {
