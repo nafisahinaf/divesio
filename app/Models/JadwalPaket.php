@@ -51,5 +51,10 @@ class JadwalPaket extends Model
 	{
 		return $this->belongsTo(PaketSelam::class, 'id_paket');
 	}
+
+	public function orders()
+	{
+		return $this->hasMany(Order::class, 'id_jadwal');
+	}
 }
 

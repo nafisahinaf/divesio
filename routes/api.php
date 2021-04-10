@@ -25,7 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:api']], function(){
 
     Route::group(['middleware' => ['divecenter',],'prefix' => 'divecenter'], function($router) {
-        Route::get('/get-all-paket-selam',[DiveCenterController::class,'getAllPaketSelam']);
+        
         Route::post('/create-paket-selam',[DiveCenterController::class,'createPaketSelam']);
         Route::put('/edit-paket-selam/{id}',[DiveCenterController::class,'updatePaketSelam']);
         Route::delete('/delete-paket-selam/{id}',[DiveCenterController::class,'deletePaketSelam']);
@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth:api']], function(){
     });
 
     Route::group(['middleware' => ['admin',],'prefix' => 'admin'], function($router) {
+        Route::get('/get-all-paket-selam',[AdminController::class,'getAllPaketSelam']);
         Route::get('/get-all-dive-center',[AdminController::class,'getAllDiveCenter']);
         Route::post('/create-dive-center',[AdminController::class,'createDiveCenter']);
         Route::put('/edit-dive-center/{id}',[AdminController::class,'updateDiveCenter']);
@@ -54,11 +55,20 @@ Route::group(['middleware' => ['auth:api']], function(){
    
     Route::group(['middleware' => ['pemesan'],'prefix' => 'pemesan'], function($router) {
         Route::get('/list-top-artikel',[UserController::class,'listTopArtikel']);
+        Route::get('/list-top-paket-selam',[UserController::class,'listTopPaketSelam']);
         Route::get('/list-top-dive-center',[UserController::class,'listTopDiveCenter']);
+        Route::get('/get-histori',[UserController::class,'getHistori']);
+        Route::get('/get-detail-histori/{id}',[UserController::class,'getDetailHistori']);
+        Route::get('/detail-dive-center/{id}',[UserController::class,'detailDiveCenter']);
+        Route::get('/detail-paket-selam/{id}',[UserController::class,'detailPaketSelam']);
+        Route::get('/detail-pemesan/{id}',[UserController::class,'detailPemesan']);
         Route::post('/create-berkas-pendaftaran',[UserController::class,'createBerkasPendaftaran']);
+        Route::post('/create-data-diri-pemesan',[UserController::class,'createDataDiriPemesan']);
+        Route::post('/create-order',[UserController::class,'createOrder']);
+        Route::post('/ajukan-dive-center',[UserController::class,'ajukanDiveCenter']);
         Route::put('/edit-berkas-pendaftarn/{id}',[UserController::class,'updateBerkasPendaftaran']);
         Route::delete('/delete-berkas-pendaftaran/{id}',[UserController::class,'deleteBerkasPendaftaran']);
-        Route::post('/create-order',[UserController::class,'createOrder']);
+        
     });  
 });
 

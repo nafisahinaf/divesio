@@ -22,6 +22,7 @@ class TransaksiPembayaransTableSeeder extends Seeder
             0 => 
             array (
                 'id_transaksi' => 2,
+                'id_order' => 1,
                 'id_user' => 1,
                 'nominal' => 5000000.0,
                 'batas_wkt_pembayaran' => 1,
@@ -30,6 +31,7 @@ class TransaksiPembayaransTableSeeder extends Seeder
             1 => 
             array (
                 'id_transaksi' => 3,
+                'id_order' => 2,
                 'id_user' => 1,
                 'nominal' => 1200000.0,
                 'batas_wkt_pembayaran' => 1,

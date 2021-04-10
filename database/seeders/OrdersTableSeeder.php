@@ -22,7 +22,6 @@ class OrdersTableSeeder extends Seeder
             0 => 
             array (
                 'id_order' => 1,
-                'id_transaksi' => 2,
                 'id_user' => 1,
                 'id_paket' => 1,
                 'id_jadwal' => 1,
@@ -32,7 +31,6 @@ class OrdersTableSeeder extends Seeder
             1 => 
             array (
                 'id_order' => 2,
-                'id_transaksi' => 3,
                 'id_user' => 1,
                 'id_paket' => 2,
                 'id_jadwal' => 2,

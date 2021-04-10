@@ -14,6 +14,7 @@ class AddForeignKeysToTransaksiPembayaransTable extends Migration
     public function up()
     {
         Schema::table('transaksi_pembayarans', function (Blueprint $table) {
+            $table->foreign('id_order', 'fk_transaksi_order')->references('id_order')->on('orders')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('id_user', 'fk_transaksi_user')->references('id_user')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
@@ -26,6 +27,7 @@ class AddForeignKeysToTransaksiPembayaransTable extends Migration
     public function down()
     {
         Schema::table('transaksi_pembayarans', function (Blueprint $table) {
+            $table->dropForeign('fk_transaksi_order');
             $table->dropForeign('fk_transaksi_user');
         });
     }

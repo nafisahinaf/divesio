@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Models\ArtikelUser;
 use App\Models\Order;
 use App\Models\DiveCenter;
+use App\Models\PaketSelam;
+use App\Models\DataDiriPemesan;
+use Illuminate\Support\Carbon; 
 use Validator;
 use Auth;
 
@@ -16,26 +19,30 @@ class UserController extends Controller
 { 
     public function register(Request $request)
     {
-        $request->validate([
+        
+        $validator = Validator::make($request->all(),[
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
             'username' => 'required|string'
         ]);
-        DB::beginTransaction();
-        try{
-            $users = new User;
-            $users->email = $request->email;
-            $users->username = $request->username;
-            $users->password = bcrypt($request->password);
-            $users->id_role=3;
-            $users->save();
+
+        // DB::beginTransaction();
+        // try{
+        //     $users = new User;
+        //     $users->email = $request->email;
+        //     $users->username = $request->username;
+        //     $users->password = bcrypt($request->password);
+        //     $users->id_role=3;
+        //     $users->save();
             
-        }catch(\Exception $e){
-            DB::rollback();
-            return response()->json(['status' => 'Register Failed', 'message' => $e->getMessage()]);
-        }
-        DB::commit();
-        
+        // }catch(\Exception $e){
+        //     DB::rollback();
+        //     return response()->json(['status' => 'Register Failed', 'message' => $e->getMessage()]);
+        // }
+        // DB::commit();
+        $data = $request->all();
+        $data['id_role']=3;
+        User::create($data);
         return response()->json([
             'message' => 'Successfully registered as User!'
         ], 201);
@@ -77,6 +84,31 @@ class UserController extends Controller
         }
     }
 
+    public function createDataDiriPemesan(request $request)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        
+        $validator = Validator::make($request->all(),[
+            'id_order' => 'required',
+            'nama_lengkap' => 'required',
+            'jenis_tanda_pengenal' => 'required',
+            'nomor_tanda_pengenal' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        $data = $request->all();
+       
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+
+        DataDiriPemesan::create($data);
+        return response()->json([
+            'status' => 'Success',
+            'message' => ' Data diri pemesan berhasil dibuat'
+       ]);
+        // dd($auth);
+    }
+
     public function createBerkasPendaftaran(request $request)
     {
         $auth = Auth::user();
@@ -85,11 +117,10 @@ class UserController extends Controller
         $diveCenter = DiveCenter::where('id_user',$id)->first();
         
         $validator = Validator::make($request->all(),[
-            'id_dive_center' => 'required',
+        'id_dive_center' => 'required',
             'nama_berkas' => 'required',
             'file_berkas' => 'required',
         ]);
-
 
         $data = $request->all();
        
@@ -105,25 +136,45 @@ class UserController extends Controller
     
     public function updateBerkasPendaftaran(Request $request, $id)
     {
-        $nama_berkas = $request->nama_berkas;
-        $file_berkas = $request->file_berkas;
+        $messages = [
+            'nama.required' => 'Nama penyetor wajib diisi.',
+            'tanggal_transaksi.required' => 'Tanggal setor wajib diisi.',
+            'uraian.required' => 'Uraian wajib diisi.',
+        ];
 
-        $request->validate([
+        $validator = $request->validate([
             'id_dive_center' => 'required',
             'nama_berkas' => 'required',
             'file_berkas' => 'required',
-        ]);
+        ],$messages);
 
         $berkaspendaftaran = BerkasPendaftaran::find($id);
-        $berkaspendaftaran->nama_berkas = $nama_berkas;
-        $berkaspendaftaran->file_berkas = $file_berkas;
-        $berkaspendaftaran->save();
+        $berkaspendaftaran->update($request->all());
 
         return response()->json([
             'status' => 'Success',
             'message' => 'Berkas pendaftaran berhasil di update'
        ]);
-       
+    }
+
+    public function update(Request $request, $id)
+    {
+        $messages = [
+            'nama.required' => 'Nama penyetor wajib diisi.',
+            'tanggal_transaksi.required' => 'Tanggal setor wajib diisi.',
+            'uraian.required' => 'Uraian wajib diisi.',
+        ];
+
+        $validator = $request->validate([
+            'nama' => 'required',
+            'tanggal_transaksi' => 'required',
+            'uraian' => 'required',
+        ], $messages);
+
+        $daftar_setor = DaftarSetor::find($id);
+        $daftar_setor->update($request->all());
+        return redirect()->route('daftar_setor.index')
+                        ->with('success','Data berhasil diubah');
     }
 
     public function deleteBerkasPendaftaran($id)
@@ -143,24 +194,19 @@ class UserController extends Controller
         $id = $auth->id_user;
 
         $order = Order::where('id_user',$id)->first();
-        
-        $request->validate([
+
+         $validator = Validator::make($request->all(),[
             'id_transaksi' => 'required',
-            'id_user' => 'required',
             'id_paket' => 'required',
             'id_jadwal' => 'required',
             'jumlah_paket' => 'required',
-            'status' => 'required',
-        ]); 
+        ]);
 
-        $order= new Order;
-        $order->id_transaksi = $request->id_transaksi;
-        $order->id_user = $request->id_user;
-        $order->id_paket = $request->id_paket;
-        $order->id_jadwal = $request->id_jadwal;
-        $order->jumlah_paket = $request->jumlah_paket;
-        $order->status = $request->status;
-        $order->save();
+        $data['id_user']=$id;
+        $data = $request->all();
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+
+        Order::create($data);
 
         return response()->json([
             'status' => 'Success',
@@ -169,34 +215,25 @@ class UserController extends Controller
         // dd($auth);
     }
 
-    public function updateOrder(Request $request, $id)
+    public function updateTransaksi(Request $request, $id)
     {
-        $nama_berkas = $request->nama_berkas;
-        $file_berkas = $request->file_berkas;
-
+      
         $request->validate([
-            'id_order' => 'required',
-            'id_transaksi' => 'required',
             'id_user' => 'required',
+            'nominal' => 'required',
+            'batas_wkt_pembayaran' => 'required',
             'id_paket' => 'required',
             'id_jadwal' => 'required',
             'jumlah_paket' => 'required',
             'status' => 'required',
         ]); 
 
-        $berkaspendaftaran = BerkasPendaftaran::find($id);
-        $berkaspendaftaran->nama_berkas = $nama_berkas;
-        $berkaspendaftaran->file_berkas = $file_berkas;
-        $berkaspendaftaran->save();
-
         return response()->json([
             'status' => 'Success',
             'message' => 'Berkas pendaftaran berhasil di update'
        ]);
-       
     }
     
-
     //get 8 artikel teratas 
     public function listTopArtikel(){
         $auth = Auth::user();
@@ -223,16 +260,7 @@ class UserController extends Controller
         $auth = Auth::user();
         $id = $auth->id_user;
 
-        // $listDiveCenter = DiveCenter::with('user')
-        //                 ->whereHas('user', function($q) use($id) {
-        //                     $q->where('id_user', '=', $id); 
-        //                 })
-        //                 // ->where('id_role',3)
-        //                 ->paginate(8);
-        
-        $listDiveCenter = DiveCenter::all()
-                        ->paginate(8)
-                        ->get();
+        $listDiveCenter = DiveCenter::paginate(8);
                         
         // dd($listArtikel);
                         return response()->json([
@@ -248,17 +276,8 @@ class UserController extends Controller
         $auth = Auth::user();
         $id = $auth->id_user;
 
-        // $listDiveCenter = DiveCenter::with('user')
-        //                 ->whereHas('user', function($q) use($id) {
-        //                     $q->where('id_user', '=', $id); 
-        //                 })
-        //                 // ->where('id_role',3)
-        //                 ->paginate(8);
-        
-        $listPaketSelam = PaketSelam::all()
-                        // ->select('')
-                        ->limit(8)
-                        ->get();
+        $listPaketSelam = PaketSelam::paginate(8);
+                             
         // dd($listArtikel);
                         return response()->json([
             'status' => 'Success',
@@ -273,12 +292,8 @@ class UserController extends Controller
         $auth = Auth::user();
         $id = $auth->id_user;
 
-        $detaildivecenter = DiveCenter::with('user')
-                        ->whereHas('user', function($q) use($id) {
-                            $q->where('id_user', '=', $id); 
-                        })
-                        // ->where('id_role',3)
-                        ->paginate(8);
+        $detaildivecenter = DiveCenter::where('id_dive_center',$id_dive_center)
+                        ->get();
         
                         return response()->json([
             'status' => 'Success',
@@ -288,4 +303,167 @@ class UserController extends Controller
         ]);
     }
 
+    //get detail pemesan
+    public function detailPemesan($id_data_diri){
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $detailpemesan = DataDiriPemesan::where('id_data_diri',$id_data_diri)
+                        ->get();
+        
+                        return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'detail_pemesan' => $detailpemesan
+            ],
+        ]);
+    }
+
+    //get detail paketselam
+    public function detailPaketSelam($id_paket){
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $detailpaketselam = PaketSelam::where('id_paket',$id_paket)
+                        ->get();
+        
+                        return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'detail_paket_selam' => $detailpaketselam
+            ],
+        ]);
+    }
+
+    //get detail histori
+    public function getDetailHistori($id_order){
+        $datenow = Carbon::now(); 
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        // $detailHistorilOrder = Order::with('user','paket_selam','jadwal_paket')
+        //                 ->where('id_user',$id)
+        //                 ->whereHas('jadwal_paket', function($q) use($datenow) {
+        //                     $q->where('tanggal', '<=', $datenow); 
+        //                 })
+        //                 ->get();
+
+        $arrayIdPaket = Order::with('id_jadwal')
+                        ->where('id_user',$id)
+                       ->where('id_order',$id_order)
+                       ->get();
+
+        // $jadwalPakets = DB::table('jadwal_pakets')
+        //                 ->whereIn('id_jadwal',$arrayIdPaket )->get();
+        
+            return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'detail_histori_order' => $detailHistorilOrder
+            ],
+        ]);
+    }
+
+    //
+    public function listKegiatanBerjalan(){
+        $datenow = Carbon::now(); 
+
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $listKegiatan = Event::with('detail_event.waktu_event','users','kategori')
+                        ->where('id_user',$id)
+                        ->whereHas('detail_event', function($q) use($datenow) {
+                            $q->where('tgl_mulai', '>=', $datenow); 
+                        })
+                        ->get();
+
+        return response()->json([
+            'status' => 'Success',
+            'size'  => sizeof($listKegiatan),
+            'data' => [
+                'list_kegiatan' => $listKegiatan
+            ],
+        ]);
+    }
+
+
+    //func edit profil
+    public function editprofil (Request $request, $id_user)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        
+        // $diveCenter = DiveCenter::where('id_user',$id)->first();
+
+        $validator = Validator::make($request->all(),[
+            'nama' => 'required|string',
+            'email' => 'required|string',
+        ]);
+        $data = $request->all();
+       
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+        $data['id_user']=$id;
+        $data['status']='pending';
+
+        user::create($data);
+        return response()->json([
+            'status' => 'Success',
+            'message' => ' Profil berhasil diperbarui'
+       ]);
+    }
+
+    //func edit pass
+
+
+    //func lihat histori pemesanan
+    public function getHistori(){
+        // $datenow = Carbon::now(); 
+
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $histori = Order::where('id_user',$id)
+                        ->get();
+
+        return response()->json([
+            'status' => 'Success',
+            'size'  => sizeof($histori),
+            'data' => [
+                'histori' => $histori
+            ],
+        ]);
+    }
+
+    //func lihat detail histori
+
+
+    //func ajukan divecenter
+    public function ajukanDiveCenter(request $request)
+    {
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        
+        // $diveCenter = DiveCenter::where('id_user',$id)->first();
+
+        $validator = Validator::make($request->all(),[
+            'nama' => 'required|string',
+            'lokasi' => 'required|string',
+            'about' => 'required|string',
+            'no_hp' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'foto_dive_center' => 'required|image|mimes:jpeg,png,jpg|max:2000',
+        ]);
+        $data = $request->all();
+       
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+        $data['id_user']=$id;
+        $data['status']='pending';
+        DiveCenter::create($data);
+        return response()->json([
+            'status' => 'Success',
+            'message' => ' Dive center berhasil diajukan'
+       ]);
+        // dd($auth);
+    }
 }

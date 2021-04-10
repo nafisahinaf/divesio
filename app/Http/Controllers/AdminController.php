@@ -163,6 +163,15 @@ class AdminController extends Controller
        ]);
     }
 
+    public function getAllPaketSelam()
+    {
+      
+        return PaketSelam::all();
+        $paketselam = Paketselam::all();
+        return view ('pages/divecenter',['paketselam' => $paketselam]);
+        
+    }
+
     public function getAllBerkasPendaftaran()
     {
         // $paketselam = DB::table('paketselam')->get();
@@ -229,6 +238,8 @@ class AdminController extends Controller
        ]);
     }
 
+    //func terima pendaftaran divecenter
+    
 
     /**
      * Remove the specified resource from storage.

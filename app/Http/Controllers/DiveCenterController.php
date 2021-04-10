@@ -20,17 +20,7 @@ class DiveCenterController extends Controller
         $this->middleware('auth');
     }
     
-    public function getAllPaketSelam()
-    {
-        // $paketselam = DB::table('paketselam')->get();
-        // dd($paketselam);
-        // $paketselam = Paketselam::all();
-        // return view ('divesites',['paketselam' => $paketselam]);
-        return PaketSelam::all();
-        $paketselam = Paketselam::all();
-        return view ('pages/divecenter',['paketselam' => $paketselam]);
-        // return Paketselam::all();
-    }
+   
 
     public function createPaketSelam(request $request)
     {
@@ -253,6 +243,7 @@ class DiveCenterController extends Controller
        ]);
     }
 
+    //func lihat paket selamnya sndr
     
 
 

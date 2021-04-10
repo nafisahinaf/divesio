@@ -42,7 +42,7 @@ class DiveCenter extends Model
 	];
 
 	protected $fillable = [
-		// 'id_user',
+		'id_user',
 		'nama',
 		'lokasi',
 		'about',
