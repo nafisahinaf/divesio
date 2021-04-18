@@ -1,3 +1,39 @@
+@extends('layouts.main')
+
+@section('title', 'Login - Divesio')
+
+@section('section')
+
+    <section class="section-gap info-area ">
+            <div class="container d-flex text-center">
+            <main class="form-signin login-wrapper">
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <h1 class="h3 mb-5">Login</h1>
+            <label for="inputEmail" class="visually-hidden">Email</label>
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+            <label for="inputPassword" class="visually-hidden">Password</label>
+            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+            <div class="checkbox mb-3">
+                <label>
+        <input type="checkbox" value="remember-me">Remember me
+      </label>
+            </div>
+            <button class="w-100 mb-3 btn btn-lg btn-primary" type="submit">Login</button>
+            <hr>
+            <p>Or</p>
+            <a class="w-60 mb-3 btn btn-lg btn-success" href="{{url('/register')}}">Create New Account</a>
+            <p class="mt-5 mb-3 text-muted">&copy; Divesio, 2021</p>
+        </form>
+    </main>
+            </div>
+        </section>
+        <!-- End about Area -->
+
+@endsection
+
+{{-- 
+
 @extends('layouts.app')
 
 @section('content')
@@ -70,4 +106,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

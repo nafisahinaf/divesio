@@ -52,6 +52,7 @@ class PaketSelam extends Model
 		'harga'
 	];
 
+	protected $with = ['jadwal_pakets', 'dive_center'];
 	public function dive_center()
 	{
 		return $this->belongsTo(DiveCenter::class, 'id_dive_center');

@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\DiveCenterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Htpp\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -27,17 +28,23 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::group(['middleware' => ['divecenter',],'prefix' => 'divecenter'], function($router) {
         
         Route::post('/create-paket-selam',[DiveCenterController::class,'createPaketSelam']);
-        Route::put('/edit-paket-selam/{id}',[DiveCenterController::class,'updatePaketSelam']);
-        Route::delete('/delete-paket-selam/{id}',[DiveCenterController::class,'deletePaketSelam']);
-        Route::get('/get-all-jadwal-paket-selam',[DiveCenterController::class,'getAllJadwalPaket']);
-        Route::get('/list-jadwal-paket-dive-center',[DiveCenterController::class,'listJadwalPaketDiveCenter']);
         Route::post('/create-jadwal-paket-selam',[DiveCenterController::class,'createJadwalPaket']);
-        Route::put('/edit-jadwal-paket-selam/{id}',[DiveCenterController::class,'updateJadwalPaket']);
-        Route::delete('/delete-jadwal-paket-selam/{id}',[DiveCenterController::class,'deleteJadwalPaket']);
-        Route::get('/get-persyaratan-paket/{id}',[DiveCenterController::class,'getPersyaratanPaket']);
         Route::post('/create-persyaratan-paket',[DiveCenterController::class,'createPersyaratanPaket']);
+
+        Route::put('/edit-jadwal-paket-selam/{id}',[DiveCenterController::class,'updateJadwalPaket']);
         Route::put('/edit-persyaratan-paket/{id}',[DiveCenterController::class,'updatePersyaratanPaket']);
+        Route::put('/edit-paket-selam/{id}',[DiveCenterController::class,'editPaketSelam']);
+        Route::put('/edit-dive-center/{id}',[DiveCenterController::class,'editDiveCenter']);
+
         Route::delete('/delete-persyaratan-paket/{id}',[DiveCenterController::class,'deletePersyaratanPaket']);
+        Route::delete('/delete-paket-selam/{id}',[DiveCenterController::class,'deletePaketSelam']);
+        Route::delete('/delete-jadwal-paket-selam/{id}',[DiveCenterController::class,'deleteJadwalPaket']);
+
+        Route::get('/get-persyaratan-paket/{id}',[DiveCenterController::class,'getPersyaratanPaket']);
+        Route::get('/get-jadwal-paket-mendatang',[DiveCenterController::class,'getJadwalPaketMendatang']);
+        Route::get('get-all-jadwal-paket-dive-center',[DiveCenterController::class,'getAllJadwalPaketDiveCenter']);
+       
+        
     });
 
     Route::group(['middleware' => ['admin',],'prefix' => 'admin'], function($router) {
@@ -56,6 +63,7 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::group(['middleware' => ['pemesan'],'prefix' => 'pemesan'], function($router) {
         Route::get('/list-top-artikel',[UserController::class,'listTopArtikel']);
         Route::get('/list-top-paket-selam',[UserController::class,'listTopPaketSelam']);
+        Route::get('/list-top-paket-selam-dive-center-pilihan/{id}',[UserController::class,'listTopPaketSelamDiveCenterPilihan']);
         Route::get('/list-top-dive-center',[UserController::class,'listTopDiveCenter']);
         Route::get('/get-histori',[UserController::class,'getHistori']);
         Route::get('/get-detail-histori/{id}',[UserController::class,'getDetailHistori']);
@@ -67,6 +75,7 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::post('/create-order',[UserController::class,'createOrder']);
         Route::post('/ajukan-dive-center',[UserController::class,'ajukanDiveCenter']);
         Route::put('/edit-berkas-pendaftarn/{id}',[UserController::class,'updateBerkasPendaftaran']);
+        Route::put('/edit-profil',[UserController::class,'updateProfil']);
         Route::delete('/delete-berkas-pendaftaran/{id}',[UserController::class,'deleteBerkasPendaftaran']);
         
     });  

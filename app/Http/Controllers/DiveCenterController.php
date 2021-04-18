@@ -10,6 +10,7 @@ use App\Models\JadwalPaket;
 use App\Models\persyaratanPaket;
 use App\Models\FasilitasPaket;
 use App\Models\User;
+use Illuminate\Support\Carbon; 
 use Auth; 
 use Validator; 
 
@@ -47,6 +48,46 @@ class DiveCenterController extends Controller
             'message' => 'Paket selam berhasil dibuat'
        ]);
     }
+
+    public function editPaketSelam(Request $request, $id)
+    {  $auth = Auth::user();
+        $id = $auth->id_user;
+        $divecenter = DiveCenter::where('id_user',$id)->first(); 
+
+        $validator = Validator::make($request->all(),[
+        "nama_paket" => 'required',
+        "deskripsi" => 'required',
+        "ketersediaan" => 'required',
+        "kuota_peserta" => 'required',
+        "foto" => 'required',
+        "harga" => 'required',
+        ]);
+
+        $data = Paketselam::find($id);
+        $data['id_dive_center']=$divecenter;
+        $data = $request->all();
+        
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+        
+        PaketSelam::where("id_paket",$id)->update($data);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Paket selam berhasil diubah'
+       ]);
+    }
+
+    public function deletePaketSelam($id)
+    {
+        $paketselam=  PaketSelam::find($id);
+        $paketselam->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Paket Selam berhasil di hapus'
+       ]);
+    }
+
     public function createJadwalPaket(request $request)
     {
         $auth = Auth::user();
@@ -74,86 +115,69 @@ class DiveCenterController extends Controller
             'message' => 'Jadwal Paket berhasil dibuat'
        ]);
     }
+   
     
-    public function editPaketSelam(Request $request, $id)
-    {  
-        $nama_paket = $request->nama_paket;
-        $deskripsi = $request->deskripsi;
-        $ketersediaan = $request->ketersediaan;
-        $kuota_peserta = $request->kuota_peserta;
-        $foto = $request->foto;
-        $harga = $request->harga;
-
-        $paketselam = PaketSelam::find($id);
-        $paketselam->nama_paket = $nama_paket;
-        $paketselam->deskripsi = $deskripsi;
-        $paketselam->ketersediaan = $ketersediaan;
-        $paketselam->kuota_peserta = $kuota_peserta;
-        $paketselam->foto = $foto;
-        $paketselam->harga = $harga;
-        $paketselam->save();
-
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Paket selam berhasil di update'
-       ]);
-       
-    }
-
-    public function deletePaketSelam($id)
-    {
-        $paketselam=  PaketSelam::find($id);
-        $paketselam->delete();
-
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Paket Selam berhasil di hapus'
-       ]);
-    }
-    //get jadwal paket yang dimiliki dive center login
-    public function listJadwalPaketDiveCenter(){
+    //get semua jadwal paket yang dimiliki dive center login
+    public function getAllJadwalPaketDiveCenter(){
         $auth = Auth::user();
         $id = $auth->id_user;
+        $divecenter = DiveCenter::where('id_user',$id)->first();
 
-        $listJadwalPaket = PaketSelam::with('jadwal_pakets','dive_center')
-                        ->whereHas('dive_center', function($q) use($id) {
-                            $q->where('id_user', '=', $id); 
-                        })
-                        // ->where('id_role',2)
-                        ->paginate(3);
+        $AllJadwalPaket = PaketSelam::find($divecenter)
+                        // ->whereHas('jadwal_pakets', function($q) use($divecenter) {
+                        //     $q->where('id_dive_center', '=', $divecenter); 
+                        // })
+                        // ->where('id_dive_center',$divecenter)
+                        ;
 
         return response()->json([
             'status' => 'Success',
             'data' => [
-                'listjadwalpaket' => $listJadwalPaket
+                'all_jadwal_paket' => $AllJadwalPaket
             ],
         ]);
     }
-    public function getAllJadwalPaket()
-    {
-        // $paketselam = DB::table('paketselam')->get();
-        // dd($paketselam);
-        // $paketselam = Paketselam::all();
-        // return view ('divesites',['paketselam' => $paketselam]);
-        return JadwalPaket::all();
-    }
 
-    
+    //get jadwal paket mendatang yang dimiliki dive center login
+    public function getJadwalPaketMendatang()
+    {
+        $datenow = Carbon::now(); 
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        $divecenter = DiveCenter::where('id_user',$id)->first();
+        
+        $jadwalPaket = PaketSelam::find($divecenter)
+                        // ->where('id_dive_center',$divecenter)
+                        ->whereHas('jadwal_pakets', function($q) use($datenow) {
+                            $q->where('tanggal', '>=', $datenow); 
+                        })
+                        // ->whereDate('tanggal', '>=', $datenow)
+                        ->get();
+
+                        return response()->json([
+                            'status' => 'Success',
+                            'data' => [
+                                'jadwal_paket' => $jadwalPaket
+                            ],
+                        ]);
+    }
     
     public function updateJadwalPaket(Request $request, $id)
     {
+        $validator = Validator::make($request->all(),[
+        // 'id_paket' => 'required',
+        'tanggal' => 'required',
+        'jam_berangkat' => 'required',
+        'durasi' => 'required',
+        ]);
         $id_paket = $request->id_paket;
-        $tanggal = $request->tanggal;
-        $jam_berangkat = $request->jam_berangkat;
-        $durasi = $request->durasi;
-
-        $jadwalpaket = JadwalPaket::find($id);
-        $jadwalpaket->id_paket = $id_paket;
-        $jadwalpaket->tanggal = $tanggal;
-        $jadwalpaket->jam_berangkat = $jam_berangkat;
-        $jadwalpaket->durasi = $durasi;
-        $jadwalpaket->save();
-
+        $data = JadwalPaket::find($id);
+        // $data['id_dive_center']=$divecenter;
+        $data = $request->all();
+        
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+        
+        JadwalPaket::where("id_jadwal",$id)->update($data);
         return response()->json([
             'status' => 'Success',
             'message' => 'Jadwal Paket berhasil di update'
@@ -245,20 +269,42 @@ class DiveCenterController extends Controller
 
     //func lihat paket selamnya sndr
     
+     //edit info dive center
+     public function editDiveCenter(Request $request, $id)
+    {  $auth = Auth::user();
+        $id = $auth->id_user;
+        $divecenter = DiveCenter::where('id_user',$id)->first(); 
 
+        $validator = Validator::make($request->all(),[
+        "nama" => 'required',
+        "lokasi" => 'required',
+        "about" => 'required',
+        "no_hp" => 'required',
+        "email" => 'required',
+        "foto_dive_center" => 'required',
+        ]);
+        
+        $diveCenter->id_user = $id;
+        // $diveCenter->status = '';
+        // $diveCenter->nama_persyaratan = $nama_persyaratan;
+        $data = DiveCenter::find($id);
+        $data['id_dive_center']=$divecenter;
+        $data = $request->all();
+        
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+        
+        DiveCenter::where("id_dive_center",$divecenter)->update($data);
 
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Dive Center berhasil diubah'
+       ]);
     }
 
+
+
+
+
+
+   
 }

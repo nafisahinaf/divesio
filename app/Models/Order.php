@@ -52,6 +52,11 @@ class Order extends Model
 		return $this->belongsTo(PaketSelam::class, 'id_paket');
 	}
 
+	public function jadwal_paket()
+	{
+		return $this->belongsTo(JadwalPaket::class, 'id_jadwal');
+	}
+
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'id_user');

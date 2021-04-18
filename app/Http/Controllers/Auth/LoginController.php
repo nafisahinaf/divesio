@@ -59,24 +59,24 @@ class LoginController extends Controller
  
         if (Auth::check()) {
             $user = $request->user();
+            $tokenResult = $user->createToken('Personal Access Token');
+                $token = $tokenResult->token;
+                $token->save();
             // dd($user->id_role);
             if($user->id_role == 1){
-                $request->session()->put('id_role',$user->id_role );
-                $request->session()->put('name','SuperAdmin' );
-                return redirect()->route('register');
+                // $request->session()->put('id_role',$user->id_role );
+                // $request->session()->put('name','SuperAdmin' );
+                return redirect()->route('home');
             }else if($user->id_role == 2){
-                $request->session()->put('name',$user->name);
-                $request->session()->put('id_role',$user->id_role );
-                return redirect()->route('register');
-            }else if($user->id_role == 5){
-                $request->session()->put('name',$user->name);
-                $request->session()->put('id_role',$user->id_role );
-                return redirect()->route('dashboard');
-            } else if ($user->id_role == 4) {
-                $request->session()->put('name',$user->name);
-                $request->session()->put('id_role',$user->id_role );
-                return redirect()->route('register');
-            }
+                // $request->session()->put('name',$user->name);
+                // $request->session()->put('id_role',$user->id_role );
+                return redirect()->route('login');
+            }else if($user->id_role == 3){
+                // $request->session()->put('name',$user->name);
+                // $request->session()->put('id_role',$user->id_role );
+                return redirect()->route('home');
+            } 
+            
         } else {
             // Session::flash('errors', 'Email atau password salah');
             session([
