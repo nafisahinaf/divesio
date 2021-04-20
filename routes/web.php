@@ -23,6 +23,7 @@ Route::get('/artikel', [PageController::class,'artikel']);
 Route::get('/login', [PageController::class,'login']);
 Route::get('/register', [PageController::class,'register']);
 Route::get('/detailartikel', [PageController::class,'detailartikel']);
+Route::get('/formpesan', [PageController::class,'formpesan']);
 
 
 Route::get('/divecenter', [DiveCenterController::class,'index']);
@@ -32,4 +33,5 @@ Route::get('/daftardivecenter',[DiveCenterController::class,'getDataDiveCenter']
 // teshome
 
 Route::get('/hometest', [PageController::class,'hometest']);
+Route::get('/formpesan2', [PageController::class,'formpesan2']);
 Route::get('/divecentertest', [DiveCenterController::class,'test']);

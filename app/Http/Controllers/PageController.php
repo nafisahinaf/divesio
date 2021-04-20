@@ -62,5 +62,15 @@ class PageController extends Controller
     {
         return view ('pages/register');
     }
+
+    public function formpesan()
+    {
+        return view ('pages/formpesan');
+    }
+
+    public function formpesan2()
+    {
+        return view ('pages/formpesan2');
+    }
 }
 

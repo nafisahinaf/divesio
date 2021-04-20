@@ -67,7 +67,7 @@
                 @endforeach
             </div>
             <div class="d-flex justify-content-center">
-                <a href="#" class="mt-40 genric-btn biru circle arrow">Paket Lain<span class="lnr lnr-arrow-right"></span></a>      
+                <a href="{{url('/divecenter')}}" class="mt-40 genric-btn biru circle arrow">Paket Lain<span class="lnr lnr-arrow-right"></span></a>      
             </div>
         </div>
     </section>

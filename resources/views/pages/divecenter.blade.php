@@ -40,7 +40,7 @@
             <div class="d-flex justify-content-center pb-40">
                 <div class="title-biru text-center">
                     <p class="h2 teks-biru mb-10 ">Mitra Divesio</p>
-                    <p>Pilih dive center yang bekerja sama dengan Divesio</p>
+                    <p>Pilih dive center yang tergabung bersama Divesio</p>
                 </div>
             </div>
             <div class="row">
@@ -95,12 +95,6 @@
     <!-- Paket -->
     <section class="section-gap">
         <div class="container">
-        <div class="d-flex justify-content-center pb-40">
-                <div class="title-biru text-center">
-                    <p class="h2 teks-biru mb-10 ">Paket untuk Anda</p>
-                    <p>Pilih paket wisata selam yang sesuai dengan kebutuhan Anda!</p>
-                </div>
-            </div>
             <div class="row">
                 @foreach ($paketselam as $pktselam)
                 <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
@@ -113,10 +107,6 @@
                         <span class="product-catagory">{{$pktselam->kategori}}</span>
                         <div class="product-bottom-details">
                             <div class="product-price"><small>Harga</small>Rp.{{$pktselam->harga}}</div>
-                            <div class="product-links">
-                                <a href=""><i class="fa fa-heart"></i></a>
-                                <a href=""><i class="fa fa-shopping-cart"></i></a>
-                            </div>
                         </div>   
                     </div>
                 </div>
@@ -124,7 +114,17 @@
                 @endforeach
             </div>
             <div class="d-flex justify-content-center">
-                <a href="#" class="mt-40 genric-btn biru circle arrow">Paket Lain<span class="lnr lnr-arrow-right"></span></a>      
+                <div class="page">
+                    <ul>
+                        <li class="no"><a href="#">«</a></li>
+                        <li class="pg active"><a href="#">1</a></li>
+                        <li class="pg"><a href="#">2</a></li>
+                        <li class="pg"><a href="#">3</a></li>
+                        <li class="pg"><a href="#">4</a></li>
+                        <li class="pg"><a href="#">5</a></li>
+                        <li class="no"><a href="#">»</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
