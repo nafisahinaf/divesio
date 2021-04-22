@@ -287,7 +287,8 @@ class DiveCenterController extends Controller
         $diveCenter->id_user = $id;
         // $diveCenter->status = '';
         // $diveCenter->nama_persyaratan = $nama_persyaratan;
-        $data = DiveCenter::find($id);
+        // $data = DiveCenter::find($id);
+        $data['id_user']=$id;
         $data['id_dive_center']=$divecenter;
         $data = $request->all();
         

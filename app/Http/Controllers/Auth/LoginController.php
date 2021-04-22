@@ -70,7 +70,7 @@ class LoginController extends Controller
             }else if($user->id_role == 2){
                 // $request->session()->put('name',$user->name);
                 // $request->session()->put('id_role',$user->id_role );
-                return redirect()->route('login');
+                return redirect()->route('home');
             }else if($user->id_role == 3){
                 // $request->session()->put('name',$user->name);
                 // $request->session()->put('id_role',$user->id_role );

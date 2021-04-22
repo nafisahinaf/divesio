@@ -450,18 +450,16 @@ class UserController extends Controller
     {
         $auth = Auth::user();
         $id = $auth->id_user;
-        
         // $diveCenter = DiveCenter::where('id_user',$id)->first();
 
-        $validator = Validator::make($request->all(),[
-            'nama' => 'required|string',
-            'lokasi' => 'required|string',
-            'about' => 'required|string',
-            'no_hp' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'foto_dive_center' => 'required|image|mimes:jpeg,png,jpg|max:2000',
-
-        ]);
+        // $validator = Validator::make($request->all(),[
+        //     'nama' => 'required|string',
+        //     'lokasi' => 'required|string',
+        //     'about' => 'required|string',
+        //     'no_hp' => 'required|string',
+        //     'email' => 'required|string|email|unique:users',
+        //     'foto_dive_center' => 'required|image|mimes:jpeg,png,jpg|max:2000',
+        // ]);
 
         DB::beginTransaction();
         try{
@@ -479,7 +477,7 @@ class UserController extends Controller
         }
           try{
             $berkaspendaftaran = new BerkasPendaftaran;
-            $berkaspendaftaran->id_dive_center = $request->id_dive_center;
+            $berkaspendaftaran->id_dive_center = $diveCenter->id_dive_center;
             $berkaspendaftaran->nama = $request->nama;
             $berkaspendaftaran->file_berkas = $request->file_berkas;
             $berkaspendaftaran->save();
@@ -503,5 +501,37 @@ class UserController extends Controller
     }
 
     //func edit pass
+    public function ubahPassword(Request $request){
+        // dd($request);
+        $request_data = $request->all();
+        $current_password = Auth::user()->password;
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:8|different:old_password'
+        ]);
+        if ($validator->fails()) {    
+            return response()->json($validator->messages(), 422);
+        }
+        $old_password = $request->old_password;
+        
+        if(Hash::check($old_password, $current_password))
+        {           
+            $user_id = Auth::user()->id;                       
+            $obj_user = User::find($user_id);
+            $obj_user->password = Hash::make($request->password);
+            $obj_user->save(); 
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Password Berhasil diubah'
+           ]);
+        }else {
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Password lama anda tidak sesuai'
+            ]);
+
+        }
+    }
+
     //func edit profil
 }
