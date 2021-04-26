@@ -3,18 +3,21 @@
 @section('title', 'Form Pemesanan')
 
 @section('section')
-    <div class="row">
-        <div class="container mt-10">
-            <p class="h3 title-biru mt-40">Checkout Pemesanan</h2>
-            <p class="mt-2">Raja Ampat Jumping Carnival</p>
-            <!-- progressbar -->
-            <ul class="mt-50 mb-50" id="progressbar">
-                <li class="active" id="peserta">Data Peserta</li>
-                <li id="konfirmasi">Konfirmasi Pemesanan</li>
-                <li id="payment">Pembayaran</li>
-                <li id="tiket">E-Voucher</li>
-            </ul>
-            <div class="col-8 p-4 border mt-5 col-7 mb-5">
+<div class="container">
+    <section class="py-5">
+        <p class="h3 title-biru">Checkout Pemesanan</h2>
+        <p class="">Raja Ampat Jumping Carnival</p>
+        <!-- progressbar -->
+        <ul class="mt-50 mb-50" id="progressbar">
+            <li class="active" id="peserta">Data Peserta</li>
+            <li id="konfirmasi">Konfirmasi Pemesanan</li>
+            <li id="payment">Pembayaran</li>
+            <li id="tiket">E-Voucher</li>
+        </ul>
+    </section>
+    <section>
+        <div class="row justify-content-between" id="checkout-content">
+            <div class="col-12 col-lg-8 p-4 border">
                 <div class="card">
                     <form id="msform" action="">
                         <fieldset>
@@ -177,7 +180,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next btn biru title-white btn-block btn-md mt-3" value="Selanjutnya" />
+                            <input type="button" name="next" class="btn-cursor next btn biru title-white btn-block btn-md mt-3" value="SELANJUTNYA >" />
                         </fieldset>
                         <fieldset>
                             <div class="form-card">
@@ -187,26 +190,71 @@
                                         <hr>
                                     </div>
                                 </div>
-                                  <div class="card">
-                                    <div class="font-weight-bold">
-                                        DATA PEMESAN
-                                    </div>
-                                    <div class="card-body border title-black mt-2" style="background: #F4F5FA">
-                                        <p class="card-title text-uppercase" style="font-weight: 500;">Nafisah Karimah</p>
-                                        <p class="card-text">Email: nafisahkarimah@gmail.com</p>
-                                        <p class="card-text">No. HP: 089746735261</p>
+                                {{-- <div class="font-weight-bold">
+                                </div> --}}
+                                <p class="font-weight-bold">DATA PEMESAN</p>
+                                  <div class="card text-nowrap" style="overflow-x:auto;">
+                                    <div class="card-body border title-black" style="background: #F4F5FA">
+                                        <p class="h6 card-title" style="font-weight: 500;">Nafisah Karimah</p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="card-text m-0" style="color:#A1A1A1;">EMAIL</p>
+                                                <p class="m-0">nafisahkarimah@gmail.com</p>
+                                            </div>
+                                            <div class="col">
+                                                <p class="card-text m-0" style="color:#A1A1A1;">NO. HP</p>
+                                                <p class="m-0">089746735261</p>
+                                            </div>
+                                        </div>
                                     </div>
                                   </div>    
-                                <P style="font-weight: 500;">DATA PESERTA</P>
-                                <label class="fieldlabels">First Name: *</label>
-                                <input type="text" name="fname" placeholder="First Name" />
-                                <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname"
-                                    placeholder="Last Name" />
-                                <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno"
-                                    placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label>
-                                <input type="text" name="phno_2" placeholder="Alternate Contact No." />
-                            </div> <input type="button" name="next" class="next action-button" value="Next" /> <input
-                                type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <p class="mt-3 font-weight-bold">DATA PESERTA</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Nama Lengkap</th>
+                                            <th scope="col">Tanggal Lahir</th>
+                                            <th scope="col">Tipe ID</th>
+                                            <th scope="col">Nomor ID</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Abdurrahman Jaisy Muhammad</td>
+                                                <td>12 April 2020</td>
+                                                <td>Otto</td>
+                                                <td>12345678901232</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Abdurrahman Jaisy Muhammad</td>
+                                                <td>12 April 2020</td>
+                                                <td>Otto</td>
+                                                <td>12345678901232</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Abdurrahman Jaisy Muhammad</td>
+                                                <td>12 April 2020</td>
+                                                <td>Otto</td>
+                                                <td>12345678901232</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {{-- <div class="row">
+
+                                <input type="button" name="previous" class="previous btn btn-outline-secondary btn-block btn-md col-4" value="< SEBELUMNYA" />
+                                <input type="button" name="next" class="next btn btn-block btn-md biru title-white col-8" value="SELANJUTNYA >" />
+                            </div> --}}
+
+                                <input type="button" name="previous" class="btn-cursor previous btn btn-outline-secondary btn-md col-3 float-left" value="< SEBELUMNYA" />
+                                <input type="button" name="next" class="btn-cursor next btn btn-md biru title-white col-8 float-right" value="SELANJUTNYA >" />
+                            
                         </fieldset>
                         <fieldset>
                             <div class="form-card">
@@ -220,7 +268,8 @@
                                 </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic"
                                     accept="image/*"> <label class="fieldlabels">Upload Signature Photo:</label> <input
                                     type="file" name="pic" accept="image/*">
-                            </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input
+                            </div> <input type="button" name="next" class="next action-button" value="Submit" />
+                            <input
                                 type="button" name="previous" class="previous action-button-previous" value="Previous" />
                         </fieldset>
                         <fieldset>
@@ -247,8 +296,64 @@
                     </form>
                 </div>
             </div>
+            <div class="col-12 col-lg-4">
+                <div class="checkout-summary border" id="checkout-summary">
+                    <div id="summary">
+                        <div class="order-summary card">
+                            <div class="checkout-header">
+                                <h5 class="order-product">
+                                    Uji Adrenalin di Pantai Timang dan Wedi Ombo 
+                                </h5>
+                                <p class="order-date">
+                                    Rabu, 28 April 2021
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <div class="order-row">
+                                    <div class="order-column">
+                                        <div class="strong">
+                                            Grup Min 2- 4 Orang
+                                        </div>
+                                        <div class="small">
+                                            2 pax @
+                                            IDR 550,000
+                                        </div>
+                                    </div>
+                                    <div class="order-column">
+                                        IDR 1,100,000
+                                    </div>
+                                </div>
+                                <span>
+                                    <div class="order-row order-footer order-subtotal">
+                                        <div class="order-column">
+                                            Subtotal
+                                        </div>
+                                        <div class="order-column">
+                                            IDR 1,100,000
+                                        </div>
+                                    </div>
+                                    <div class="order-row order-footer order-total">
+                                        <div class="order-column">
+                                            Total
+                                        </div>
+                                        <div class="order-column">
+                                            IDR
+                                            <span>
+                                                1,100,000
+                                            </span>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+</div>
+    {{-- <div class="row">
     </div>
     <script>
-    </script>
+    </script> --}}
 @endsection

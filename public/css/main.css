@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 @font-face {
 	font-family: 'Linearicons-Free';
 	src:url('../fonts/Linearicons-Free.eot?w118d');
@@ -17,6 +21,20 @@
     /*  Basic Style 
 /* =================================== */
 
+
+#checkout-summary{
+    position: sticky;
+    z-index: 1;
+    top: 32px;
+    top: 5rem;
+    border: none;
+    /* margin-bottom: 32px; */
+    /* margin-bottom: 4rem; */
+}
+
+#checkout-content{
+    margin-bottom: 4rem;
+}
 
 /* Start Form Pesan*/
 #heading {
@@ -224,6 +242,93 @@
     object-fit: cover
 }
 /* End form pesan */
+
+/* Checkout-aside */
+.page-checkout .checkout-summary, .page-thankyou .checkout-summary {
+    position: -webkit-sticky;
+    position: absolute;
+    top: 32px;
+    top: 2rem;
+    border: none;
+    margin-bottom: 32px;
+    margin-bottom: 2rem;
+}
+
+.checkout-header {
+    background-color: #223f77;
+    border: none;
+    padding: 24px 32px;
+    padding: 1.5rem 2rem;
+}
+
+.order-date {
+    color: #6ab4d9;
+    margin-bottom: 0;
+}
+
+.order-product {
+    color: #fff;
+    margin-bottom: 4px;
+    margin-bottom: .25rem;
+    font-weight: 400;
+    font-size: 22px;
+    font-size: 1.375rem;
+}
+
+.card-body {
+    padding: 24px 32px;
+    padding: 1.5rem 2rem;
+}
+
+.order-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    margin-bottom: .75rem;
+}
+
+.order-column {
+    width: 50%;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
+.order-column:last-child {
+    text-align: right;
+}
+
+.order-subtotal, .order-total{
+    margin-top: 12px;
+    margin-top: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.order-column:last-child{
+    color: #223f77;
+}
+
+.order-footer {
+    padding-top: 12px;
+    padding-top: .75rem;
+    margin-top: 12px;
+    margin-top: .75rem;
+    margin-bottom: 0;
+    border-top: 1px solid #ebebeb;
+}
+
+.bold, .strong, strong {
+    font-weight: 700;
+}
+
+.btn-cursor{
+    cursor: pointer;
+}
+/* End Checkout-aside */
 
 
 /* Start login form */
