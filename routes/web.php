@@ -14,8 +14,7 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [PageController::class,'home']);
+Route::get('/', [PageController::class,'home'])->name('home');
 Route::get('/detaildivecenter', [PageController::class,'detaildivecenter']);
 Route::get('/detailpaket', [PageController::class,'detailpaket']);
 Route::get('/about', [PageController::class,'about']);
@@ -30,6 +29,11 @@ Route::get('/divecenter', [DiveCenterController::class,'index']);
 
 Route::get('/daftardivecenter',[DiveCenterController::class,'getDataDiveCenter']);
 
+Auth::routes();
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//Route cek BE
 // teshome
 
 Route::get('/hometest', [PageController::class,'hometest']);

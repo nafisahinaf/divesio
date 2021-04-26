@@ -2,15 +2,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\User;
 use App\Models\Paketselam;
-
 
 class PageController extends Controller
 {
-    // public function home()
-    // {
-    //     return view ('pages/home');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function home()
     {

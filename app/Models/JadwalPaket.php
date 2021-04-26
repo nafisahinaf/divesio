@@ -26,11 +26,11 @@ class JadwalPaket extends Model
 {
 	protected $table = 'jadwal_pakets';
 	protected $primaryKey = 'id_jadwal';
-	public $incrementing = false;
+	// public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id_jadwal' => 'int',
+		// 'id_jadwal' => 'int',
 		'id_paket' => 'int',
 		'durasi' => 'int'
 	];
@@ -47,8 +47,14 @@ class JadwalPaket extends Model
 		'durasi'
 	];
 
-	public function paket_selams()
+	public function paket_selam()
 	{
 		return $this->belongsTo(PaketSelam::class, 'id_paket');
 	}
+
+	public function orders()
+	{
+		return $this->hasMany(Order::class, 'id_jadwal');
+	}
 }
+

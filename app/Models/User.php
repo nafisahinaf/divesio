@@ -9,6 +9,9 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 /**
  * Class User
@@ -24,15 +27,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $updated_at
  * 
  * @property Role $role
+ * @property Collection|Artikel[] $artikels
  * @property Collection|DiveCenter[] $dive_centers
  * @property Collection|Feedback[] $feedback
  * @property Collection|Order[] $orders
+ * @property Collection|PendaftaranDivecenter[] $pendaftaran_divecenters
  * @property Collection|TransaksiPembayaran[] $transaksi_pembayarans
  *
  * @package App\Models
  */
-class User extends Model
+class User extends Authenticatable
 {
+	use Notifiable, HasApiTokens;
+
 	protected $table = 'users';
 	protected $primaryKey = 'id_user';
 
@@ -58,9 +65,15 @@ class User extends Model
 		'remember_token'
 	];
 
-	public function roles()
+	public function role()
 	{
 		return $this->belongsTo(Role::class, 'id_role');
+	}
+
+	public function artikels()
+	{
+		return $this->belongsToMany(Artikel::class, 'artikel_users', 'id_user', 'id_artikel')
+					->withPivot('id_artikel_user');
 	}
 
 	public function dive_centers()
@@ -68,7 +81,7 @@ class User extends Model
 		return $this->hasMany(DiveCenter::class, 'id_user');
 	}
 
-	public function feedbacks()
+	public function feedback()
 	{
 		return $this->hasMany(Feedback::class, 'id_user');
 	}
@@ -76,6 +89,11 @@ class User extends Model
 	public function orders()
 	{
 		return $this->hasMany(Order::class, 'id_user');
+	}
+
+	public function pendaftaran_divecenters()
+	{
+		return $this->hasMany(PendaftaranDivecenter::class, 'id_user');
 	}
 
 	public function transaksi_pembayarans()

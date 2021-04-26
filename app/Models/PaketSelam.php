@@ -16,15 +16,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_dive_center
  * @property string $nama_paket
  * @property string $deskripsi
- * @property string $fasilitas
  * @property string $ketersediaan
- * @property int $jumlah_peserta
+ * @property int $kuota_peserta
  * @property string $foto
  * @property float $harga
  * 
+ * @property Collection|FasilitasPaketSelam[] $fasilitas_paket_selams
+ * @property Collection|FasilitasPaket[] $fasilitas_pakets
  * @property Collection|Feedback[] $feedback
  * @property Collection|JadwalPaket[] $jadwal_pakets
  * @property Collection|Order[] $orders
+ * @property Collection|PersyaratanPaket[] $persyaratan_pakets
  *
  * @package App\Models
  */
@@ -32,13 +34,11 @@ class PaketSelam extends Model
 {
 	protected $table = 'paket_selams';
 	protected $primaryKey = 'id_paket';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id_paket' => 'int',
 		'id_dive_center' => 'int',
-		'jumlah_peserta' => 'int',
+		'kuota_peserta' => 'int',
 		'harga' => 'float'
 	];
 
@@ -46,14 +46,29 @@ class PaketSelam extends Model
 		'id_dive_center',
 		'nama_paket',
 		'deskripsi',
-		'fasilitas',
 		'ketersediaan',
-		'jumlah_peserta',
+		'kuota_peserta',
 		'foto',
 		'harga'
 	];
 
-	public function feedbacks()
+	protected $with = ['jadwal_pakets', 'dive_center'];
+	public function dive_center()
+	{
+		return $this->belongsTo(DiveCenter::class, 'id_dive_center');
+	}
+
+	public function fasilitas_paket_selams()
+	{
+		return $this->hasMany(FasilitasPaketSelam::class, 'id_paket_selam');
+	}
+
+	public function fasilitas_pakets()
+	{
+		return $this->hasMany(FasilitasPaket::class, 'id_paket');
+	}
+
+	public function feedback()
 	{
 		return $this->hasMany(Feedback::class, 'id_paket');
 	}
@@ -67,8 +82,9 @@ class PaketSelam extends Model
 	{
 		return $this->hasMany(Order::class, 'id_paket');
 	}
-	public function dive_centers()
+
+	public function persyaratan_pakets()
 	{
-		return $this->belongsTo(DiveCenter::class, 'id_dive_center');
+		return $this->hasMany(PersyaratanPaket::class, 'id_paket');
 	}
 }
