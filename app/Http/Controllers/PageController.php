@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
 use App\Models\Paketselam;
+// use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -62,6 +63,13 @@ class PageController extends Controller
     public function register()
     {
         return view ('pages/register');
+    }
+    public function profile(){
+        $user = Auth::user();
+        return response()->json([
+            'status' => 'Success',
+            'profil' => $user
+       ]);
     }
 }
 

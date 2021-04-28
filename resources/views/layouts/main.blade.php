@@ -54,7 +54,18 @@
                                     <a class="dropdown-item" href={{url('/joinus')}}>Join Us</a>
                                 </div>
                             </li>
+                            @auth
+                                <li><a>hallo {{ Auth::user()->name}}</a> </li>
+                                <form action="{{ route('logout')}}" method="post">
+                                    @csrf
+                                    <button type="submit"><a>Logout </a></button>
+                                    {{-- <a type="submit">Logout</a> --}}
+                                </form>
+                                
+                            @endauth
+                            @guest
                             <li><a href="{{url('/login')}}">Login</a></li>
+                            @endguest
                         </ul>
                     </div>
                 </div>

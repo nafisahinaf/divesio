@@ -238,7 +238,22 @@ class AdminController extends Controller
        ]);
     }
 
-    //func terima pendaftaran divecenter
+    //func terima pendaftaran divecenter, ubah id_role->2
+    public function acceptDiveCenter(Request $request, $id)
+    {  $auth = Auth::user();
+        $id = $auth->id_user;
+        
+        $data['id_role']=2;
+
+        $data = $request->all();
+        
+        User::where("id_dive_center",$divecenter)->update($data);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Dive Center berhasil diubah'
+       ]);
+    }
     
 
     /**

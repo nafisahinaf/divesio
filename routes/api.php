@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::put('/edit-persyaratan-paket/{id}',[DiveCenterController::class,'updatePersyaratanPaket']);
         Route::put('/edit-paket-selam/{id}',[DiveCenterController::class,'editPaketSelam']);
         Route::put('/edit-dive-center/{id}',[DiveCenterController::class,'editDiveCenter']);
+        Route::put('/edit-profil/{id}',[DiveCenterController::class,'editProfil']);
 
         Route::delete('/delete-persyaratan-paket/{id}',[DiveCenterController::class,'deletePersyaratanPaket']);
         Route::delete('/delete-paket-selam/{id}',[DiveCenterController::class,'deletePaketSelam']);
@@ -42,6 +43,7 @@ Route::group(['middleware' => ['auth:api']], function(){
 
         Route::get('/get-persyaratan-paket/{id}',[DiveCenterController::class,'getPersyaratanPaket']);
         Route::get('/get-jadwal-paket-mendatang',[DiveCenterController::class,'getJadwalPaketMendatang']);
+        Route::get('/get-paket-selam',[DiveCenterController::class,'getPaketSelam']);
         Route::get('get-all-jadwal-paket-dive-center',[DiveCenterController::class,'getAllJadwalPaketDiveCenter']);
        
         
@@ -70,12 +72,13 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::get('/detail-dive-center/{id}',[UserController::class,'detailDiveCenter']);
         Route::get('/detail-paket-selam/{id}',[UserController::class,'detailPaketSelam']);
         Route::get('/detail-pemesan/{id}',[UserController::class,'detailPemesan']);
+        Route::get('/lihat-profil',[UserController::class,'lihatProfil']);
         Route::post('/create-berkas-pendaftaran',[UserController::class,'createBerkasPendaftaran']);
         Route::post('/create-data-diri-pemesan',[UserController::class,'createDataDiriPemesan']);
         Route::post('/create-order',[UserController::class,'createOrder']);
         Route::post('/ajukan-dive-center',[UserController::class,'ajukanDiveCenter']);
-        Route::put('/edit-berkas-pendaftarn/{id}',[UserController::class,'updateBerkasPendaftaran']);
-        Route::put('/edit-profil',[UserController::class,'updateProfil']);
+        Route::put('/edit-berkas-pendaftaran/{id}',[UserController::class,'updateBerkasPendaftaran']);
+        Route::put('/edit-profil/{id}',[UserController::class,'editProfil']);
         Route::delete('/delete-berkas-pendaftaran/{id}',[UserController::class,'deleteBerkasPendaftaran']);
         
     });  
