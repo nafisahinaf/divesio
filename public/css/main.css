@@ -21,6 +21,13 @@
     /*  Basic Style 
 /* =================================== */
 
+.rad-30{
+    border-radius: 30px;
+}
+
+.radlr-30{
+    border-radius: 30px 30px 0px 0px;
+}
 
 #checkout-summary{
     position: sticky;
@@ -366,7 +373,7 @@
 
     .form-signin {
         width: 100%;
-        max-width: 330px;
+        max-width: 500px;
         padding: 15px;
         margin: auto;
     }
@@ -395,6 +402,10 @@
     }
 
     /* End login form */
+
+    .biru-gradient{
+        background: linear-gradient(88deg, #0a5489 1%, #0080C6 96.32%);
+    }
     
     .pembatas {
         background: linear-gradient(85.42deg, #132B4F 5.02%, #0080C6 96.32%);
@@ -557,6 +568,10 @@
 
     .biru{
         background-color: #223F77;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #e9ecef !important;
     }
     
     .card-artikel {
@@ -1056,6 +1071,7 @@
         font-weight: 300;
         line-height: 1.625em;
         position: relative;
+        background-color: #F4F5FA;
     }
     
     ol,
@@ -3123,7 +3139,7 @@
     
     @media (min-width: 1000px) {
         .dropdown .dropdown-menu {
-            display: block;
+            display: none;
             opacity: 0;
             -webkit-transition: all 200ms ease-in;
             -moz-transition: all 200ms ease-in;

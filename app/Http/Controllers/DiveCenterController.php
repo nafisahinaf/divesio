@@ -20,8 +20,12 @@ class DiveCenterController extends Controller
     {
         $this->middleware('auth');
     }
-    
-   
+
+    public function index()
+    {
+        $paketselam = Paketselam::all();
+        return view ('pages/divecenter',['paketselam' => $paketselam]);
+    }
 
     public function createPaketSelam(request $request)
     {
