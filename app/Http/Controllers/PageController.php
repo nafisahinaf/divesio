@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function home()
@@ -72,6 +72,11 @@ class PageController extends Controller
     public function formpesan2()
     {
         return view ('pages/formpesan2');
+    }
+
+    public function profil()
+    {
+        return view ('pages/profil');
     }
 }
 
