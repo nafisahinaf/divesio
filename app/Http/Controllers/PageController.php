@@ -78,5 +78,10 @@ class PageController extends Controller
     {
         return view ('pages/profil');
     }
+
+    public function pengajuandivecenter()
+    {
+        return view ('pages/pengajuan');
+    }
 }
 
