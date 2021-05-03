@@ -26,6 +26,8 @@ Route::get('/registerr', [PageController::class,'register']);
 Route::get('/detailartikel', [PageController::class,'detailartikel']);
 Route::get('/formpesan', [PageController::class,'formpesan']);
 Route::get('/profil', [PageController::class,'profil']);
+Route::get('/pengajuandivecenter', [PageController::class,'pengajuandivecenter']);
+
 
 Auth::routes();
 

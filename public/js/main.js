@@ -1,3 +1,6 @@
+// addFasilitas
+// removeFasilitas
+
 // Input number
 $('.btn-number').click(function(e){
   e.preventDefault();
