@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth:api']], function(){
         Route::get('/detail-paket-selam/{id}',[UserController::class,'detailPaketSelam']);
         Route::get('/detail-pemesan/{id}',[UserController::class,'detailPemesan']);
         Route::get('/lihat-profil',[UserController::class,'lihatProfil']);
+        Route::get('/generate-token/{order}',[UserController::class,'_generatePaymentToken']);
+
         Route::post('/create-berkas-pendaftaran',[UserController::class,'createBerkasPendaftaran']);
         Route::post('/create-data-diri-pemesan',[UserController::class,'createDataDiriPemesan']);
         Route::post('/create-order',[UserController::class,'createOrder']);

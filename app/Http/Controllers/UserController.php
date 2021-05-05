@@ -13,6 +13,8 @@ use App\Models\Order;
 use App\Models\DiveCenter;
 use App\Models\PaketSelam;
 use App\Models\DataDiriPemesan;
+use App\Models\TransaksiPembayaran;
+use App\Models\Payment;
 use Illuminate\Support\Carbon; 
 use Validator;
 use Auth;
@@ -222,25 +224,96 @@ class UserController extends Controller
         // $order = Order::where('id_user',$id)->first();
 
          $validator = Validator::make($request->all(),[
-            'id_transaksi' => 'required',
             'id_paket' => 'required',
             'id_jadwal' => 'required',
             'jumlah_paket' => 'required',
         ]);
 
-        $data['id_user']=$id;
-        // $data['status']=$id;
-        $data = $request->all();
+        //$data['id_user']=$id;
+        //
+        //ambil data paket 
+        //ambil jumlah pembelian dan harga paket
+        $harga_paket = PaketSelam::where('id_paket',$request->id_paket)->value('harga');
+        //$jumlah_paket = Order::where('id_order',$request->id_order)->value('jumlah_paket');
+        //hitung total tagihan
+        $total_tagihan= $harga_paket * $request->jumlah_paket ;//kali jumlah paket
+        //$data['total_tagihan']=$total_tagihan;
+        $data = $request->except('_token');
         // $paketselam->id_dive_center = $diveCenter->id_dive_center;
 
-        Order::create($data);
+        $order = new Order;
+        $order->id_paket = $request->id_paket;
+        $order->id_user = $id;
+        $order->id_jadwal = $request->id_jadwal;
+        $order->jumlah_paket = $request->jumlah_paket;
+        $order->status = $request->status;
+        if($order){
+            $order->save();
+        };
+        //$order = Order::create($data);
+        //buat transaksi dari data order
+        if($order){
+            $transaksi = new TransaksiPembayaran;
+            $transaksi->id_user = $id;
+            $transaksi->id_order = $order->id_order;
+            $transaksi->nominal = $total_tagihan;
 
+            $transaksi->batas_wkt_pembayaran = 1;
+            $transaksi->status = "Menunggu pembayaran";
+            if($transaksi){
+                $transaksi->save();
+            }
+        };
+
+
+        $this->_generatePaymentToken($data);
         return response()->json([
             'status' => 'Success',
             'message' => 'Order berhasil dibuat'
        ]);
         // dd($auth);
     }
+    
+    public function _generatePaymentToken($data)
+	{
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        
+		$this->initPaymentGateway();
+        $user = User::where('id_user',$id)->get();
+        $customerDetails = array();
+        foreach($user as $u){
+            $customerDetails = [
+                'first_name' => $u->name,
+			    'last_name' => ' ',
+			    'email' => $u->email,
+			    'phone' => ' ',
+            ];
+        }
+        $total_tagihan = TransaksiPembayaran::where('id_order', $data)->value('nominal');
+
+		$params = [
+			'enable_payments' => \App\Models\Payment::PAYMENT_CHANNELS,
+			'transaction_details' => [
+				'order_id' => $data,
+				'gross_amount' => $total_tagihan,
+			],
+			'customer_details' => $customerDetails,
+			'expiry' => [
+				'start_time' => date('Y-m-d H:i:s T'),
+				'unit' => \App\Models\Payment::EXPIRY_UNIT,
+				'duration' => \App\Models\Payment::EXPIRY_DURATION,
+			],
+		];
+        return $params;
+		$snap = \Midtrans\Snap::createTransaction($params);
+		
+		if ($snap->token) {
+			$order->payment_token = $snap->token;
+			$order->payment_url = $snap->redirect_url;
+			$order->save();
+		}
+	}
 
     public function updateTransaksi(Request $request, $id)
     {
