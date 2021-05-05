@@ -28,12 +28,24 @@ Route::get('/formpesan', [PageController::class,'formpesan']);
 Route::get('/profil', [PageController::class,'profil']);
 Route::get('/pengajuandivecenter', [PageController::class,'pengajuandivecenter']);
 
+// Dashboard
+Route::get('/dashboard', [PageController::class,'dashboard']);
+
+Route::get('/users', [PageController::class,'users']);
+Route::get('/listdivecenter', [PageController::class,'listdivecenter']);
+Route::get('/listtransaksi', [PageController::class,'listtransaksi']);
+
+Route::get('/profildivecenter', [PageController::class,'profildivecenter']);
+Route::get('/paketselam', [PageController::class,'paketselam']);
+Route::get('/add-paket', [PageController::class,'addpaket']);
+Route::get('/transaksidivecenter', [PageController::class,'transaksidivecenter']);
+// End dashboard
+
+Route::get('/divecenter', [DiveCenterController::class,'index']);
+Route::get('/daftardivecenter',[DiveCenterController::class,'getDataDiveCenter']);
 
 Auth::routes();
 
-Route::get('/divecenter', [DiveCenterController::class,'index']);
-
-Route::get('/daftardivecenter',[DiveCenterController::class,'getDataDiveCenter']);
 
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
