@@ -73,47 +73,62 @@
                 </div>
                 <!-- end tab -->
 
-                <!-- Pilih jumlah paket -->
+                <!-- Pilih paket -->
                 <div class="col-lg-5 col-sm-6">
                     <div class="col-lg-10 ml-auto"> 
                         <div class="mb-4">  
-                            <p class="h6 title-biru">Jumlah Paket</p>
+                            <p class="h6 title-biru">Pilih Tanggal</p>
                             <div class="border mt-3 p-3">
-                                <div class="input-group">
+
+                            </div>
+                        </div>
+                        <div class="mb-4">  
+                            <p class="h6 title-biru">Pilih Jumlah Paket</p>
+                            <div class="border mt-3 p-3">
+                                <div class="input-group m-1">
                                     <span class="input-group-prepend">
-                                        <button type="button" class="btn btn-danger btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                        <button type="button" class="btn btn-number btn-secondary" disabled="disabled" data-type="minus" data-field="quant[1]">
                                             <span class="fas fa-minus"></span>
                                         </button>
                                     </span>     
-                                    <input type="text" name="quant[1]" class="form-control text-center input-number" value="1" min="1" max="10">
+                                    <input type="text" name="quant[1]" class="form-control text-center input-number" value="0" min="0" max="10">
                                     <span class="input-group-append">
-                                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[1]">
+                                        <button type="button" class="btn btn-number title-white biru" data-type="plus" data-field="quant[1]">
                                             <span class="fas fa-plus"></span>
                                         </button>
                                     </span>
                                 </div>
+                                <hr>
+                                <p class="text-center price" data-price="500000">@ Rp500.000/Paket</p>
                             </div>
+
                         </div>
                         <div class="mb-4">  
                             <p class="h6 title-biru">Rincian Pemesanan</p>
-                            <table class="table table-borderless mt-3 pd-3 border">  
-                                    <tbody>
-                                        <tr>
-                                            <td>Tanggal Pesanan</th>
-                                            <th class="mr-auto">20 Juli 2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Paket</th>
-                                            <th>2</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Biaya</th>
-                                            <th>Rp2.000.000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <table class="table table-borderless border mt-3 pd-3">  
+                                <tbody class="title-biru">
+                                    <tr>
+                                        <td>Tanggal Pesanan</th>
+                                        <th class="text-right">20 Juli 2021</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah Paket</th>
+                                        <th class="text-right">2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Biaya</th>
+                                        <th class="text-right">Rp2.000.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=2>
+                                            <a href="{{url('/formpesan')}}" type="submit" class="btn biru title-white btn-md btn-block text-uppercase">Pesan Sekarang</button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
                         </div>
-                    </div> 
+                        </div> 
                     </div>
                 </div>
                 <!-- end pilih paket -->

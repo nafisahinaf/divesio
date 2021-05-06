@@ -1,6 +1,39 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('body')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{-- CSRF Token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link rel="shortcut icon" type="image/png" href="{{asset('img/fav.png')}}">
+
+    <title>@yield('title', 'Dashboard')</title>
+
+    {{-- Scripts --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+    {{-- Icon --}}
+    <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    {{-- Styles --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+    <link rel="icon" href="{{ asset('img/logo.png')}}" type="image/png" >
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
+
+    {{-- <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
+</head>
+<body>
+
 
 {{-- Button Navigation Bar - Mobile Ver. --}}
     <nav class="navbar fixed-top d-md-none d-lg-none d-xl-none d-sm-flex navbar-dark navbar-expand-md flex-md-nowrap shadow align-content-center">
@@ -14,18 +47,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        {{-- Navigation --}}
-        <nav id="navbarSupportedContent"
-            class="nav px-0 vh-100 d-md-block bg-light sidebar position-fixed shadow overflow-auto pt-md-0 pt-5 pb-4 collapse navbar-body">
-            <div class="pt-sm-3 pb-4 w-100">
-
-                {{-- List Item Nav --}}
-                @include('layouts.content.content_navbar')
-                {{-- End List Item Nav --}}
-
-            </div>
-        </nav>
-        {{-- End Navigation --}}
+        @include('dashboard.layout.sidebar')
 
         {{-- Konten --}}
         <main class="ml-sm-auto my-5 p-0 my-md-0 content-body">
@@ -68,7 +90,7 @@
                     {{-- Footer --}}
                     <p class="copy-right text-center clearfix mb-4">
                         <span class="text-md-left float-md-left">Copyright © 2020.</span>
-                        <span class="text-md-right float-md-right">Sistem Informasi Pemesanan Paket Wisata Selam - DIVESIO
+                        <span class="text-md-right float-md-right">Sistem Informasi Pemesanan Paket Wisata Selam - <strong>DIVESIO</strong>
                     </p>
                     {{-- End Footer --}}
 
@@ -82,4 +104,7 @@
     </div>
 </div>
 
-@endsection
+<script src="https://kit.fontawesome.com/c01d595813.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

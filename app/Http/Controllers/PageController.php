@@ -11,7 +11,7 @@ class PageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function home()
@@ -64,6 +64,7 @@ class PageController extends Controller
     {
         return view ('pages/register');
     }
+
     public function profile(){
         $user = Auth::user();
         return response()->json([
@@ -71,5 +72,39 @@ class PageController extends Controller
             'profil' => $user
        ]);
     }
+
+    public function formpesan()
+    {
+        return view ('pages/formpesan');
+    }
+
+    public function formpesan2()
+    {
+        return view ('pages/formpesan2');
+    }
+
+    public function profil()
+    {
+        return view ('pages/profil');
+    }
+
+    public function pengajuandivecenter()
+    {
+        return view ('pages/pengajuan');
+    }
+
+    // Dashboard
+    public function dashboard(){return view ('dashboard/layout/base');}
+
+    public function users(){return view ('dashboard/content/admin/users');}
+    public function listdivecenter(){return view ('dashboard/content/admin/divecenter');}
+    public function listtransaksi(){return view ('dashboard/content/admin/listtransaksi');}
+
+    public function profildivecenter(){return view ('dashboard/content/divecenter/profil');}
+    public function paketselam(){return view ('dashboard/content/divecenter/paketselam');}
+    public function addpaket(){return view ('dashboard/content/divecenter/addpaket');}
+    public function transaksidivecenter(){return view ('dashboard/content/transaksi-divecenter/');}
+    // end dashboard
+
 }
 

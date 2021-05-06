@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     
     <!--CSS============================================= -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
@@ -54,6 +55,7 @@
                                     <a class="dropdown-item" href={{url('/joinus')}}>Join Us</a>
                                 </div>
                             </li>
+
                             @auth
                                 <li><a>hallo {{ Auth::user()->name}}</a> </li>
                                 <form action="{{ route('logout')}}" method="post">
@@ -66,6 +68,30 @@
                             @guest
                             <li><a href="{{url('/login')}}">Login</a></li>
                             @endguest
+
+                            @if (Route::has('login'))
+                                    @auth
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                                <span class="fas fa-user"></span>
+                                                  </a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href={{url('/about')}}>Profil</a>
+                                                <a class="dropdown-item" href={{ route('logout') }}
+                                                   onclick="event.preventDefault();
+                                                                document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li><a href="{{url('/login')}}">Login</a></li>
+                                    @endauth
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -124,6 +150,7 @@
     <!-- End footer Area -->
 
     <script src="{{asset('js/vendor/jquery-2.2.4.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js " integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4 " crossorigin="anonymous"></script>
     <script src="{{asset('js/vendor/bootstrap.min.js')}}"></script>
     <script src="https://kit.fontawesome.com/c01d595813.js" crossorigin="anonymous"></script>

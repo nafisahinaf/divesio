@@ -7,7 +7,7 @@ use App\Http\Controllers\DiveCenterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Htpp\Controllers\Auth\AuthController;
+// use App\Http\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -94,8 +94,8 @@ Route::group([
     Route::group([
       'middleware' => 'auth:api'
     ], function() {
-        Route::post('logout', [AuthController::class,'logout']);
-        Route::get('user', [AuthController::class,'user']);
+        // Route::post('logout', [AuthController::class,'logout']);
+        // Route::get('user', [AuthController::class,'user']);
     });
 });
 

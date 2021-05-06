@@ -1,4 +1,4 @@
-@extends('layouts.navbar')
+@extends('layouts.base')
 
 @section('title')
     {{ $title_page }}

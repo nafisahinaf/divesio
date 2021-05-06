@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 @font-face {
 	font-family: 'Linearicons-Free';
 	src:url('../fonts/Linearicons-Free.eot?w118d');
@@ -16,6 +20,339 @@
     /* =================================== */
     /*  Basic Style 
 /* =================================== */
+
+[data-role="dynamic-fields"] > .form-inline + .form-inline {
+    margin-top: 0.5em;
+}
+
+[data-role="dynamic-fields"] > .form-inline [data-role="add"] {
+    display: none;
+}
+
+[data-role="dynamic-fields"] > .form-inline:last-child [data-role="add"] {
+    display: inline-block;
+}
+
+[data-role="dynamic-fields"] > .form-inline:last-child [data-role="remove"] {
+    display: none;
+}
+
+.rad-30{
+    border-radius: 30px;
+}
+
+.radlr-30{
+    border-radius: 30px 30px 0px 0px;
+}
+
+#checkout-summary{
+    position: sticky;
+    z-index: 1;
+    top: 32px;
+    top: 5rem;
+    border: none;
+    /* margin-bottom: 32px; */
+    /* margin-bottom: 4rem; */
+}
+
+#checkout-content{
+    margin-bottom: 4rem;
+}
+
+/* Start Form Pesan*/
+#heading {
+    text-transform: uppercase;
+    color: #223F77;
+    font-weight: normal
+}
+
+#msform {
+    /* text-align: center; */
+    position: relative;
+    margin-top: 20px
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
+}
+
+.form-card {
+    text-align: left
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none
+}
+
+#msform input[type="text"],
+#msform textarea {
+    padding: 8px 15px 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    /* margin-bottom: 25px; */
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    /* font-family: montserrat; */
+    color: #2C3E50;
+    background-color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 1px
+}
+
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #223F77;
+    outline-width: 0
+}
+
+#msform .action-button {
+    width: 100px;
+    background: #223F77;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 0px 10px 5px;
+    float: right
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+    background-color: #311B92
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px 10px 0px;
+    float: right
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    background-color: #000000
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    position: relative
+}
+
+.fs-title {
+    color: #223F77;
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-align: left
+}
+
+.purple-text {
+    color: #223F77;
+    font-weight: normal
+}
+
+.steps {
+    font-size: 25px;
+    color: gray;
+    margin-bottom: 10px;
+    font-weight: normal;
+    text-align: right
+}
+
+.fieldlabels {
+    color: gray;
+    text-align: left
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: #223F77
+}
+
+#progressbar li {
+    list-style-type: none;
+    /* font-size: 15px; */
+    text-align: center;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400
+}
+
+#progressbar #peserta:before {
+    font-family: FontAwesome;
+    content: "\f500"
+}
+
+#progressbar #konfirmasi:before {
+    font-family: FontAwesome;
+    content: "\f0ae"
+}
+
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    content: "\f155"
+}
+
+#progressbar #tiket:before {
+    font-family: FontAwesome;
+    content: "\f3ff"
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #223F77
+}
+
+.progress {
+    height: 20px
+}
+
+.progress-bar {
+    background-color: #223F77
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+/* End form pesan */
+
+/* Checkout-aside */
+.page-checkout .checkout-summary, .page-thankyou .checkout-summary {
+    position: -webkit-sticky;
+    position: absolute;
+    top: 32px;
+    top: 2rem;
+    border: none;
+    margin-bottom: 32px;
+    margin-bottom: 2rem;
+}
+
+.checkout-header {
+    background-color: #223f77;
+    border: none;
+    padding: 24px 32px;
+    padding: 1.5rem 2rem;
+}
+
+.order-date {
+    color: #6ab4d9;
+    margin-bottom: 0;
+}
+
+.order-product {
+    color: #fff;
+    margin-bottom: 4px;
+    margin-bottom: .25rem;
+    font-weight: 400;
+    font-size: 22px;
+    font-size: 1.375rem;
+}
+
+.card-body {
+    padding: 24px 32px;
+    padding: 1.5rem 2rem;
+}
+
+.order-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    margin-bottom: .75rem;
+}
+
+.order-column {
+    width: 50%;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
+.order-column:last-child {
+    text-align: right;
+}
+
+.order-subtotal, .order-total{
+    margin-top: 12px;
+    margin-top: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.order-column:last-child{
+    color: #223f77;
+}
+
+.order-footer {
+    padding-top: 12px;
+    padding-top: .75rem;
+    margin-top: 12px;
+    margin-top: .75rem;
+    margin-bottom: 0;
+    border-top: 1px solid #ebebeb;
+}
+
+.bold, .strong, strong {
+    font-weight: 700;
+}
+
+.btn-cursor{
+    cursor: pointer;
+}
+/* End Checkout-aside */
+
 
 /* Start login form */
 
@@ -52,7 +389,7 @@
 
     .form-signin {
         width: 100%;
-        max-width: 330px;
+        max-width: 500px;
         padding: 15px;
         margin: auto;
     }
@@ -81,6 +418,10 @@
     }
 
     /* End login form */
+
+    .biru-gradient{
+        background: linear-gradient(88deg, #0a5489 1%, #0080C6 96.32%);
+    }
     
     .pembatas {
         background: linear-gradient(85.42deg, #132B4F 5.02%, #0080C6 96.32%);
@@ -235,6 +576,18 @@
     
     .title-kuning {
         color: #F2C94C;
+    }
+
+    .orange{
+        background-color: #F2994A;
+    }
+
+    .biru{
+        background-color: #223F77;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #e9ecef !important;
     }
     
     .card-artikel {
@@ -734,6 +1087,7 @@
         font-weight: 300;
         line-height: 1.625em;
         position: relative;
+        background-color: #F4F5FA;
     }
     
     ol,
@@ -801,7 +1155,7 @@
         background: #f9f9ff;
     }
     
-    h1,
+    /* h1,
     h2,
     h3,
     h4,
@@ -824,7 +1178,7 @@
         margin-top: 0;
         font-family: "Poppins", sans-serif;
         font-weight: 600;
-    }
+    } */
     
     /* h1,
     .h1 {
@@ -1480,7 +1834,7 @@
         font-size: 24px;
     }
     
-    h1 {
+    /* h1 {
         font-size: 36px;
     }
     
@@ -1511,7 +1865,7 @@
     h5,
     h6 {
         line-height: 1.5em;
-    }
+    } */
     
     .typography h1,
     .typography h2,
@@ -2801,7 +3155,7 @@
     
     @media (min-width: 1000px) {
         .dropdown .dropdown-menu {
-            display: block;
+            display: none;
             opacity: 0;
             -webkit-transition: all 200ms ease-in;
             -moz-transition: all 200ms ease-in;
@@ -3491,4 +3845,3 @@
     .switch-wrap p {
         margin: 0;
     }
-    

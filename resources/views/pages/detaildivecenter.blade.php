@@ -112,7 +112,17 @@
                 @endforeach
             </div>
             <div class="d-flex justify-content-center">
-                <a href="#" class="mt-40 genric-btn biru circle arrow">Paket Lain<span class="lnr lnr-arrow-right"></span></a>      
+                <div class="page">
+                    <ul>
+                        <li class="no"><a href="#">«</a></li>
+                        <li class="pg active"><a href="#">1</a></li>
+                        <li class="pg"><a href="#">2</a></li>
+                        <li class="pg"><a href="#">3</a></li>
+                        <li class="pg"><a href="#">4</a></li>
+                        <li class="pg"><a href="#">5</a></li>
+                        <li class="no"><a href="#">»</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
