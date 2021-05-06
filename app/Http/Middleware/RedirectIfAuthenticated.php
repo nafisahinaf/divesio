@@ -29,4 +29,7 @@ class RedirectIfAuthenticated
 
         return $next($request);
     }
+    public function redirectTo(){
+        return route('home');
+    }
 }

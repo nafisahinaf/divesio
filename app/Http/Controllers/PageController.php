@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
 use App\Models\Paketselam;
+// use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -64,6 +65,14 @@ class PageController extends Controller
         return view ('pages/register');
     }
 
+    public function profile(){
+        $user = Auth::user();
+        return response()->json([
+            'status' => 'Success',
+            'profil' => $user
+       ]);
+    }
+
     public function formpesan()
     {
         return view ('pages/formpesan');
@@ -96,5 +105,6 @@ class PageController extends Controller
     public function addpaket(){return view ('dashboard/content/divecenter/addpaket');}
     public function transaksidivecenter(){return view ('dashboard/content/transaksi-divecenter/');}
     // end dashboard
+
 }
 
