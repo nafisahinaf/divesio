@@ -21,11 +21,13 @@ class DiveCenterController extends Controller
         $this->middleware('auth');
     }
 
+
     public function index()
     {
         $paketselam = Paketselam::all();
         return view ('pages/divecenter',['paketselam' => $paketselam]);
     }
+
 
     public function createPaketSelam(request $request)
     {
@@ -148,22 +150,24 @@ class DiveCenterController extends Controller
         $datenow = Carbon::now(); 
         $auth = Auth::user();
         $id = $auth->id_user;
+        // ::with('dive_center')->where('id_dive_center',$divecenter);
         $divecenter = DiveCenter::where('id_user',$id)->first();
         
-        $jadwalPaket = PaketSelam::find($divecenter)
-                        // ->where('id_dive_center',$divecenter)
-                        ->whereHas('jadwal_pakets', function($q) use($datenow) {
-                            $q->where('tanggal', '>=', $datenow); 
+        $jadwalPaket = PaketSelam::where('id_dive_center',$divecenter->id_dive_center)
+                    ->whereHas('jadwal_pakets', function($q) use($datenow) {
+                        $q->where('tanggal', '>=', $datenow); 
                         })
                         // ->whereDate('tanggal', '>=', $datenow)
-                        ->get();
+                    ->get();
 
                         return response()->json([
                             'status' => 'Success',
                             'data' => [
-                                'jadwal_paket' => $jadwalPaket
+                                'jadwal_paket' =>$jadwalPaket 
                             ],
                         ]);
+
+                       
     }
     
     public function updateJadwalPaket(Request $request, $id)
@@ -271,8 +275,24 @@ class DiveCenterController extends Controller
        ]);
     }
 
-    //func lihat paket selamnya sndr
+    //func lihat paket selamnya sndr  
+    public function getPaketSelam(){
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        $diveCenter = DiveCenter::where('id_user',$id)->first();
+
+        $listPaketSelam = PaketSelam::where('id_dive_center',$diveCenter)
+                        ->get();
+
+             return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'list_paket_selam' => $listPaketSelam
+            ],
+        ]);
+    }
     
+
      //edit info dive center
      public function editDiveCenter(Request $request, $id)
     {  $auth = Auth::user();
@@ -291,7 +311,8 @@ class DiveCenterController extends Controller
         $diveCenter->id_user = $id;
         // $diveCenter->status = '';
         // $diveCenter->nama_persyaratan = $nama_persyaratan;
-        $data = DiveCenter::find($id);
+        // $data = DiveCenter::find($id);
+        // $data['id_user']=$id;
         $data['id_dive_center']=$divecenter;
         $data = $request->all();
         
@@ -305,10 +326,29 @@ class DiveCenterController extends Controller
        ]);
     }
 
+    public function editProfil(Request $request, $id)
+    {  $auth = Auth::user();
+        $id = $auth->id_user;
+        $divecenter = DiveCenter::where('id_user',$id)->first(); 
 
+        $validator = Validator::make($request->all(),[
+            "nama" => 'required',
+            "lokasi" => 'required',
+            "about" => 'required',
+            "no_hp" => 'required',
+            "email" => 'required',
+            "foto_dive_center" => 'required',
+        ]);
+        
+        $data = $request->all();
+        
+        DiveCenter::where("id_dive_center",$id)->update($data);
 
-
-
-
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Profil berhasil diubah'
+       ]);
+    }
+    
    
 }

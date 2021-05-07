@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+// namespace Midtrans;
+
 
 use Illuminate\Http\Request;
 use App\Models\BerkasPendaftaran;
@@ -11,9 +13,35 @@ use App\Models\Order;
 use App\Models\DiveCenter;
 use App\Models\PaketSelam;
 use App\Models\DataDiriPemesan;
+use App\Models\TransaksiPembayaran;
+use App\Models\Payment;
 use Illuminate\Support\Carbon; 
 use Validator;
 use Auth;
+
+// require_once dirname(__FILE__) . '/../../Midtrans.php';
+// //Set Your server key
+// Config::$serverKey = "<SB-Mid-server-A3AGqtzgqdTEvnqEmPPo2lHR>";
+// // Uncomment for production environment
+// // Config::$isProduction = true;
+// Config::$isSanitized = Config::$is3ds = true;
+
+// // Required
+// $transaction_details = array(
+//     'order_id' => rand(),
+//     'gross_amount' => 94000, // no decimal allowed for creditcard
+// );
+
+// // Fill transaction details
+// $transaction = array(
+//     'transaction_details' => $transaction_details,
+//     'customer_details' => $customer_details,
+//     'item_details' => $item_details,
+// );
+
+// $snapToken = Snap::getSnapToken($transaction);
+// echo "snapToken = ".$snapToken;
+
 
 class UserController extends Controller
 { 
@@ -193,27 +221,99 @@ class UserController extends Controller
         $auth = Auth::user();
         $id = $auth->id_user;
 
-        $order = Order::where('id_user',$id)->first();
+        // $order = Order::where('id_user',$id)->first();
 
          $validator = Validator::make($request->all(),[
-            'id_transaksi' => 'required',
             'id_paket' => 'required',
             'id_jadwal' => 'required',
             'jumlah_paket' => 'required',
         ]);
 
-        $data['id_user']=$id;
-        $data = $request->all();
+        //$data['id_user']=$id;
+        //
+        //ambil data paket 
+        //ambil jumlah pembelian dan harga paket
+        $harga_paket = PaketSelam::where('id_paket',$request->id_paket)->value('harga');
+        //$jumlah_paket = Order::where('id_order',$request->id_order)->value('jumlah_paket');
+        //hitung total tagihan
+        $total_tagihan= $harga_paket * $request->jumlah_paket ;//kali jumlah paket
+        //$data['total_tagihan']=$total_tagihan;
+        $data = $request->except('_token');
         // $paketselam->id_dive_center = $diveCenter->id_dive_center;
 
-        Order::create($data);
+        $order = new Order;
+        $order->id_paket = $request->id_paket;
+        $order->id_user = $id;
+        $order->id_jadwal = $request->id_jadwal;
+        $order->jumlah_paket = $request->jumlah_paket;
+        $order->status = $request->status;
+        if($order){
+            $order->save();
+        };
+        //$order = Order::create($data);
+        //buat transaksi dari data order
+        if($order){
+            $transaksi = new TransaksiPembayaran;
+            $transaksi->id_user = $id;
+            $transaksi->id_order = $order->id_order;
+            $transaksi->nominal = $total_tagihan;
 
+            $transaksi->batas_wkt_pembayaran = 1;
+            $transaksi->status = "Menunggu pembayaran";
+            if($transaksi){
+                $transaksi->save();
+            }
+        };
+
+
+        $this->_generatePaymentToken($data);
         return response()->json([
             'status' => 'Success',
             'message' => 'Order berhasil dibuat'
        ]);
         // dd($auth);
     }
+    
+    public function _generatePaymentToken($data)
+	{
+        $auth = Auth::user();
+        $id = $auth->id_user;
+        
+		$this->initPaymentGateway();
+        $user = User::where('id_user',$id)->get();
+        $customerDetails = array();
+        foreach($user as $u){
+            $customerDetails = [
+                'first_name' => $u->name,
+			    'last_name' => ' ',
+			    'email' => $u->email,
+			    'phone' => ' ',
+            ];
+        }
+        $total_tagihan = TransaksiPembayaran::where('id_order', $data)->value('nominal');
+
+		$params = [
+			'enable_payments' => \App\Models\Payment::PAYMENT_CHANNELS,
+			'transaction_details' => [
+				'order_id' => $data,
+				'gross_amount' => $total_tagihan,
+			],
+			'customer_details' => $customerDetails,
+			'expiry' => [
+				'start_time' => date('Y-m-d H:i:s T'),
+				'unit' => \App\Models\Payment::EXPIRY_UNIT,
+				'duration' => \App\Models\Payment::EXPIRY_DURATION,
+			],
+		];
+        return $params;
+		$snap = \Midtrans\Snap::createTransaction($params);
+		
+		if ($snap->token) {
+			$order->payment_token = $snap->token;
+			$order->payment_url = $snap->redirect_url;
+			$order->save();
+		}
+	}
 
     public function updateTransaksi(Request $request, $id)
     {
@@ -403,25 +503,65 @@ class UserController extends Controller
 
 
     //func edit profil
-    public function editProfil (Request $request, $id_user)
-    {
-        $auth = Auth::user();
+    // public function editProfil (Request $request, $id_user)
+    // {
+    //     $auth = Auth::user();
+    //     $id = $auth->id_user;
+
+    //     $validator = Validator::make($request->all(),[
+    //         'name' => 'required|string',
+    //         'email' => 'required|string',
+    //     ]);
+    //     $data = $request->all();
+
+    //     $user = User::find($id);
+    //     user::update($data);
+    //     return response()->json([
+    //         'status' => 'Success',
+    //         'message' => ' Profil berhasil diperbarui'
+    //    ]);
+    // }
+    public function editProfil(Request $request, $id)
+    {  $auth = Auth::user();
         $id = $auth->id_user;
-        
-        // $diveCenter = DiveCenter::where('id_user',$id)->first();
+        // $divecenter = DiveCenter::where('id_user',$id)->first(); 
 
         $validator = Validator::make($request->all(),[
-            'nama' => 'required|string',
+        "name" => 'required',
+        "email" => 'required',
         ]);
+        
+        // $data['id_user']=$id;
+        // $data['id_dive_center']=$divecenter;
         $data = $request->all();
+        
+        // $paketselam->id_dive_center = $diveCenter->id_dive_center;
+        
+        User::where("id_user",$id)->update($data);
 
-        $user = User::find($id);
-        user::update($data);
         return response()->json([
             'status' => 'Success',
-            'message' => ' Profil berhasil diperbarui'
+            'message' => 'Profil berhasil diubah'
        ]);
     }
+    
+    // func liat profil
+    public function lihatProfil(){
+        $auth = Auth::user();
+        $id = $auth->id_user;
+
+        $dataprofil = User::where('id_user',$id)
+                    ->get();
+
+             return response()->json([
+            'status' => 'Success',
+            'data' => [
+                'data_profil' => $dataprofil
+            ],
+        ]);
+    }
+
+
 
     //func lihat histori pemesanan
     public function getHistori(){
@@ -450,18 +590,16 @@ class UserController extends Controller
     {
         $auth = Auth::user();
         $id = $auth->id_user;
-        
         // $diveCenter = DiveCenter::where('id_user',$id)->first();
 
-        $validator = Validator::make($request->all(),[
-            'nama' => 'required|string',
-            'lokasi' => 'required|string',
-            'about' => 'required|string',
-            'no_hp' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'foto_dive_center' => 'required|image|mimes:jpeg,png,jpg|max:2000',
-
-        ]);
+        // $validator = Validator::make($request->all(),[
+        //     'nama' => 'required|string',
+        //     'lokasi' => 'required|string',
+        //     'about' => 'required|string',
+        //     'no_hp' => 'required|string',
+        //     'email' => 'required|string|email|unique:users',
+        //     'foto_dive_center' => 'required|image|mimes:jpeg,png,jpg|max:2000',
+        // ]);
 
         DB::beginTransaction();
         try{
@@ -479,7 +617,7 @@ class UserController extends Controller
         }
           try{
             $berkaspendaftaran = new BerkasPendaftaran;
-            $berkaspendaftaran->id_dive_center = $request->id_dive_center;
+            $berkaspendaftaran->id_dive_center = $diveCenter->id_dive_center;
             $berkaspendaftaran->nama = $request->nama;
             $berkaspendaftaran->file_berkas = $request->file_berkas;
             $berkaspendaftaran->save();
@@ -503,5 +641,41 @@ class UserController extends Controller
     }
 
     //func edit pass
+    public function ubahPassword(Request $request){
+        // dd($request);
+        $request_data = $request->all();
+        $current_password = Auth::user()->password;
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:8|different:old_password'
+        ]);
+        if ($validator->fails()) {    
+            return response()->json($validator->messages(), 422);
+        }
+        $old_password = $request->old_password;
+        
+        if(Hash::check($old_password, $current_password))
+        {           
+            $user_id = Auth::user()->id;                       
+            $obj_user = User::find($user_id);
+            $obj_user->password = Hash::make($request->password);
+            $obj_user->save(); 
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Password Berhasil diubah'
+           ]);
+        }else {
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Password lama anda tidak sesuai'
+            ]);
+
+        }
+    }
+
     //func edit profil
+
+
 }
+
+?>
